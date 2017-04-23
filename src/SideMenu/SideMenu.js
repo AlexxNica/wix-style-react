@@ -1,5 +1,5 @@
-import React, {PropTypes} from 'react';
-
+import React from 'react';
+import {node} from 'prop-types';
 import styles from './styles.scss';
 
 const SideMenu = ({children}) =>
@@ -8,7 +8,7 @@ const SideMenu = ({children}) =>
   </div>;
 
 SideMenu.propTypes = {
-  children: PropTypes.node
+  children: node
 };
 
 export default SideMenu;

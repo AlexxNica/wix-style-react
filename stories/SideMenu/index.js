@@ -7,6 +7,9 @@ import Readme from '../../src/SideMenu/README.md';
 import ExampleStandard from './ExampleStandard';
 import ExampleStandardRaw from '!raw!./ExampleStandard';
 
+import ExampleSubMenu from './ExampleSubMenu';
+import ExampleSubMenuRaw from '!raw!./ExampleSubMenu';
+
 
 storiesOf('Core', module)
   .add('SideMenu', () => (
@@ -17,6 +20,10 @@ storiesOf('Core', module)
 
       <CodeExample title="Standard" code={ExampleStandardRaw}>
         <ExampleStandard/>
+      </CodeExample>
+
+      <CodeExample title="Sub Menu" code={ExampleSubMenuRaw}>
+        <ExampleSubMenu/>
       </CodeExample>
     </div>
   ));

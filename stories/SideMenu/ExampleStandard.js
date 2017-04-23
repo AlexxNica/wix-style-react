@@ -30,6 +30,14 @@ export default () =>
           Link #3
         </SideMenu.NavigationLink>
 
+        <SideMenu.SubMenu title="Link #4">
+          <SideMenu.Navigation>
+            <SideMenu.NavigationLink onClick={() => console.log('#5 clicked')}>
+              Link #5
+            </SideMenu.NavigationLink>
+          </SideMenu.Navigation>
+        </SideMenu.SubMenu>
+
         <SideMenu.NavigationLink
           href="https://academy.wix.com/en/seo"
           target="_blank"
