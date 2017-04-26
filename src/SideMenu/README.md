@@ -1,10 +1,11 @@
 # SideMenu
 
-A **WIP** collection of dumb components for easy side menu combination.
+A collection of dumb components for easy side menu combination.
+
+You can use the [DrillView](/DrillView)
 
 yet to be done:
 
-* multi level links
 * RTL
 
 ## Components
@@ -47,6 +48,19 @@ thin line to separate nav items
 | -        | -        | -            | -          | -           |
 | children | node     | -            | -          | -           |
 
+### SubMenu `<SideMenu.SubMenu />`
+
+A container of sub navigation items
+
+| propName          | propType | defaultValue | isRequired | description                                                                                             |
+| -                 | -        | -            | -          | -                                                                                                       |
+| title             | string   | -            | true       | the sub menu's title (will appear both in closed & opened modes)                                        |
+| isActive          | bool     | false        | -          | slightly different styling to indicate active link (closed mode only)                                   |
+| isOpen            | bool     | false        | -          | when set to `false` the sub menu will appear like a `Link`, otherwise it will render the sub navigation |
+| onSelectHandler   | func     | noop         | -          | A callback to call when the sub menu anchor is clicked                                                  |
+| onBackHandler     | func     | noop         | -          | A callback to call when the sub menu back button is clicked                                             |
+| children          | node     | -            | -          | sub `Navigation` menu                                                                                   |
+| ...rest           | *        | -            | -          | any other prop will be added to root element (e.g. `onClick`, `onMouseEnter` etc.)                      |
 
 ### Promotion `<SideMenu.Promotion />`
 
