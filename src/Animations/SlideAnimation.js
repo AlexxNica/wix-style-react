@@ -12,7 +12,7 @@ export const SlideDirection = {
 class SlideAnimation extends Component {
   render() {
     const {animateAppear, animateEnter, animateLeave, children, direction} = this.props;
-    const animationDuration = 600; // Synced with SlideAnimation.scss file
+    const animationDuration = 300; // Synced with SlideAnimation.scss file
     const transitionName = direction === SlideDirection.left ? slideLeft : slideRight;
     return (
       <ReactCSSTransitionGroup
@@ -22,7 +22,7 @@ class SlideAnimation extends Component {
         transitionEnterTimeout={animateEnter ? animationDuration : 0}
         transitionLeaveTimeout={animateLeave ? animationDuration : 0}
         transitionName={transitionName}
-      >
+        >
         {children}
       </ReactCSSTransitionGroup>
     );

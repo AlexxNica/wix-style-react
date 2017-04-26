@@ -4,7 +4,7 @@ import Logo from './logo';
 import Navigation from './navigation';
 import NavigationLink from './navigation/link';
 import NavigationSeparator from './navigation/separator';
-import SubMenu from './navigation/subMenu';
+import SubMenu from './navigation/SubMenu';
 import Promotion from './promotion';
 import Footer from './footer';
 import FooterLink from './footer/link';
