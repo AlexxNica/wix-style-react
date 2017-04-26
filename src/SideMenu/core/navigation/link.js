@@ -1,6 +1,5 @@
 import React, {PropTypes} from 'react';
 import classnames from 'classnames';
-
 import styles from './styles.scss';
 
 const Link = ({children, isDiminishedHover, isActive, ...rest}) =>

@@ -1,15 +1,14 @@
 import React, {PropTypes} from 'react';
-
 import styles from './styles.scss';
 
-const Promotion = ({children}) =>
-  <div className={styles.promotion}>
+const Navigation = ({children}) =>
+  <div className={styles.navigation}>
     {children}
   </div>;
 
-Promotion.propTypes = {
+Navigation.propTypes = {
   children: PropTypes.node
 };
 
-export default Promotion;
+export default Navigation;
 

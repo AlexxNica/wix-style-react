@@ -1,15 +1,14 @@
 import React, {PropTypes} from 'react';
-
 import styles from './styles.scss';
 
-const Navigation = ({children}) =>
-  <div className={styles.navigation}>
+const Footer = ({children}) =>
+  <div className={styles.footer}>
     {children}
   </div>;
 
-Navigation.propTypes = {
+Footer.propTypes = {
   children: PropTypes.node
 };
 
-export default Navigation;
+export default Footer;
 

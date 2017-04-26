@@ -1,9 +1,9 @@
 import React, {Children} from 'react';
 import {string, func, bool} from 'prop-types';
-import {children, once} from '../../Composite';
+import {children, once} from '../../../Composite';
 import Link from './link';
 import Navigation from './index';
-import {ArrowLeft} from '../../Icons/dist';
+import {ArrowLeft} from '../../../Icons/dist';
 import styles from './styles.scss';
 
 const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHandler, ...rest}) => {

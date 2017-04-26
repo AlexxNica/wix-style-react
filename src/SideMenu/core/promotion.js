@@ -1,15 +1,14 @@
 import React, {PropTypes} from 'react';
-
 import styles from './styles.scss';
 
-const Footer = ({children}) =>
-  <div className={styles.footer}>
+const Promotion = ({children}) =>
+  <div className={styles.promotion}>
     {children}
   </div>;
 
-Footer.propTypes = {
+Promotion.propTypes = {
   children: PropTypes.node
 };
 
-export default Footer;
+export default Promotion;
 
