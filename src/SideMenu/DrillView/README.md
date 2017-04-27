@@ -7,7 +7,7 @@ The menus are rendered using the SideMenu design.
 ## Usage
 
 ```html
-<SideMenuDrill id="ROOT" header={header} promotion={promotion} footer={footer}>>
+<SideMenuDrill id="ROOT">
   <SideMenuDrill.Link to="https://www.wix.com">Link #1</SideMenuDrill.Link>
   <SideMenuDrill.Link to="https://www.wix.com">Link #2</SideMenuDrill.Link>
   <SideMenuDrill.SubMenu id="SUB_MENU_1" title="Sub Menu #1">
@@ -26,9 +26,6 @@ The menus are rendered using the SideMenu design.
 | propName          | propType | defaultValue | isRequired | description                                                                        |
 | -                 | -        | -            | -          | -                                                                                  |
 | id                | string   | -            | true       | A unique ID for the menu                                                           |
-| header            | node     | -            | -          | A component that will be rendered at the top of the menu                           |
-| promotion         | node     | -            | -          | A component that will be rendered right above the footer                           |
-| footer            | node     | -            | -          | A component that will be rendered at the bottom of the menu                        |
 | children          | node     | -            | -          | A list of navigation items of types `SideMenuDrill.Link`, `SideMenuDrill.SubMenu`  |
 
 ## Components
@@ -52,7 +49,4 @@ A container of sub navigation items
 | -                 | -        | -            | -          | -                                                                                  |
 | id                | string   | -            | true       | A unique ID for the menu                                                           |
 | title             | string   | -            | true       | The sub menu's title                                                               |
-| header            | node     | -            | -          | A component that will be rendered at the top of the menu                           |
-| promotion         | node     | -            | -          | A component that will be rendered right above the footer                           |
-| footer            | node     | -            | -          | A component that will be rendered at the bottom of the menu                        |
 | children          | node     | -            | true       | A list of navigation items of types `SideMenuDrill.Link`, `SideMenuDrill.SubMenu`  |

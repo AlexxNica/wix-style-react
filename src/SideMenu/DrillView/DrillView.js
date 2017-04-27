@@ -63,18 +63,6 @@ class SideMenuDrill extends WixComponent {
     return menuClone;
   }
 
-  _renderHeader(header) {
-    return header ? <SideMenu.Logo>{header}</SideMenu.Logo> : null;
-  }
-
-  _renderPromotion(promotion) {
-    return promotion ? <SideMenu.Promotion>{promotion}</SideMenu.Promotion> : null;
-  }
-
-  _renderFooter(footer) {
-    return footer ? <SideMenu.Footer>{footer}</SideMenu.Footer> : null;
-  }
-
   _renderNavigation(menu) {
     if (menu.props.id === this.props.id) {
       return menu.props.children;
@@ -84,14 +72,9 @@ class SideMenuDrill extends WixComponent {
   }
 
   _renderMenu(menu) {
-    const {header, promotion, footer} = menu.props;
-
     return (
       <div className={styles.drillViewPanel}>
-        {this._renderHeader(header)}
         {this._renderNavigation(menu)}
-        {this._renderPromotion(promotion)}
-        {this._renderFooter(footer)}
       </div>
     );
   }
@@ -121,9 +104,6 @@ class SideMenuDrill extends WixComponent {
 
 SideMenuDrill.propTypes = {
   id: string.isRequired,
-  header: node,
-  promotion: node,
-  footer: node,
   children: node
 };
 

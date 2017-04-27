@@ -1,4 +1,4 @@
-import React, {Children} from 'react';
+import React from 'react';
 import {string, func, bool} from 'prop-types';
 import {children, once} from '../../../Composite';
 import Link from './link';
@@ -7,8 +7,6 @@ import {ArrowLeft} from '../../../Icons/dist';
 import styles from './styles.scss';
 
 const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHandler}) => {
-  const [navigation] = Children.toArray(children);
-
   if (isOpen) {
     return (
       <div>
@@ -17,7 +15,7 @@ const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHand
           <span>Back</span>
         </a>
         <div className={styles.categoryLabel}>{title}</div>
-        {navigation}
+        {children}
       </div>
     );
   }
