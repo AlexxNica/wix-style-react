@@ -12,6 +12,12 @@ const header = (
   </div>
 );
 
+const header2 = (
+  <div onClick={() => console.log('Logo clicked')}>
+    <h2 style={{color: '#fff'}}>My Internal App</h2>
+  </div>
+);
+
 const promotion = (
   <Button theme="fullpurple" onClick={() => console.log('Promotion button clicked!')}>
     Buy 1 for price of 2!
@@ -70,7 +76,7 @@ class ExampleSideMenuDrill extends React.Component {
 
   renderMenu(menu) {
     return (
-      <SideMenuDrill.SubMenu key={menu.id} id={menu.id} title={menu.title}>
+      <SideMenuDrill.SubMenu header={header2} promotion={promotion} key={menu.id} id={menu.id} title={menu.title}>
         {this.renderItems(menu.items)}
       </SideMenuDrill.SubMenu>
     );

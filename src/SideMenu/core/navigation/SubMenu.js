@@ -12,7 +12,7 @@ const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHand
   if (isOpen) {
     return (
       <div {...rest}>
-        <a href="#" className={styles.backLink} onClick={onBackHandler}>
+        <a className={styles.backLink} onClick={onBackHandler}>
           <span className={styles.backArrow}><ArrowLeft/></span>
           <span>Back</span>
         </a>

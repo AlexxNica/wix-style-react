@@ -2,7 +2,7 @@
 
 A collection of dumb components for easy side menu combination.
 
-You can use the [DrillView](/DrillView)
+You can use the [DrillView](./DrillView)
 
 yet to be done:
 

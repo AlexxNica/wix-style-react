@@ -124,8 +124,7 @@ SideMenuDrill.propTypes = {
   header: node,
   promotion: node,
   footer: node,
-  items: array,
-  selectedId: string
+  children: node
 };
 
 export default SideMenuDrill;

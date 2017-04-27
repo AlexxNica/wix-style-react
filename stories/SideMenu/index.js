@@ -3,6 +3,7 @@ import {storiesOf} from '@kadira/storybook';
 import Markdown from '../utils/Components/Markdown';
 import CodeExample from '../utils/Components/CodeExample';
 import Readme from '../../src/SideMenu/README.md';
+import SideMenuDrillReadme from '../../src/SideMenu/DrillView/README.md';
 
 import ExampleStandard from './ExampleStandard';
 import ExampleStandardRaw from '!raw!./ExampleStandard';
@@ -34,6 +35,8 @@ storiesOf('Core', module)
 storiesOf('6. Navigation', module)
   .add('6.4 SideMenu Drill', () => (
     <div>
+      <Markdown source={SideMenuDrillReadme}/>
+
       <h1>Usage examples</h1>
 
       <CodeExample title="SideMenu Example" code={ExampleSideMenuDrillRaw}>
