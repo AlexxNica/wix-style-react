@@ -1,8 +1,8 @@
 import React from 'react';
-import {node, bool, string} from 'prop-types';
+import {node, string} from 'prop-types';
 import SideMenu from '../index';
 
-const SubMenu = ({children, title, header, promotion, footer, ...rest}) => (
+const SubMenu = ({children, title, ...rest}) => (
   <SideMenu.SubMenu title={title} {...rest}>
     <SideMenu.Navigation>
       {children}

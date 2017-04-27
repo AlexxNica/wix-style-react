@@ -6,12 +6,12 @@ import Navigation from './index';
 import {ArrowLeft} from '../../../Icons/dist';
 import styles from './styles.scss';
 
-const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHandler, ...rest}) => {
+const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHandler}) => {
   const [navigation] = Children.toArray(children);
 
   if (isOpen) {
     return (
-      <div {...rest}>
+      <div>
         <a className={styles.backLink} onClick={onBackHandler}>
           <span className={styles.backArrow}><ArrowLeft/></span>
           <span>Back</span>

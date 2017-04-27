@@ -1,5 +1,5 @@
 import React, {Children} from 'react';
-import {string, node, array} from 'prop-types';
+import {string, node} from 'prop-types';
 import WixComponent from '../../WixComponent';
 import SideMenu from '../index';
 import SubMenu from './SubMenu';
