@@ -12,7 +12,7 @@ class SideMenuDrill extends WixComponent {
     super(props);
 
     const menus = {};
-    this._processChildren(this, menus);
+    this._processChildren({props: this.props, type: 'root'}, menus);
 
     this.state = {
       menus,
@@ -25,7 +25,7 @@ class SideMenuDrill extends WixComponent {
 
   componentWillReceiveProps(nextProps) {
     const menus = {};
-    this._processChildren({props: nextProps}, menus);
+    this._processChildren({props: nextProps, type: 'root'}, menus);
     this.setState({menus});
   }
 
@@ -51,16 +51,20 @@ class SideMenuDrill extends WixComponent {
 
   _processChildren(menu, menus, parent) {
     const childrenClone = Children.map(menu.props.children, child => {
-      if (child.type === SubMenu) {
+      if (child.props && child.props.children) {
         return this._processChildren(child, menus, menu);
       }
 
       return child;
     });
 
-    const menuClone = this._alterMenu(menu, childrenClone, parent);
-    menus[menuClone.props.id] = menuClone;
-    return menuClone;
+    if (menu.type === SubMenu || menu.type === 'root') {
+      const menuClone = this._alterMenu(menu, childrenClone, parent);
+      menus[menuClone.props.id] = menuClone;
+      return menuClone;
+    }
+
+    return menu;
   }
 
   _renderNavigation(menu) {

@@ -1,46 +1,42 @@
-import React from 'react';
-import {string, func, bool} from 'prop-types';
-import {children, once} from '../../../Composite';
-import Link from './link';
+import React, {Children} from 'react';
+import {string, func, bool, node} from 'prop-types';
 import Navigation from './index';
 import {ArrowLeft} from '../../../Icons/dist';
 import styles from './styles.scss';
 
-const SubMenu = ({children, title, isActive, isOpen, onSelectHandler, onBackHandler}) => {
-  if (isOpen) {
-    return (
-      <div>
-        <a className={styles.backLink} onClick={onBackHandler}>
-          <span className={styles.backArrow}><ArrowLeft/></span>
-          <span>Back</span>
-        </a>
-        <div className={styles.categoryLabel}>{title}</div>
-        {children}
-      </div>
-    );
-  }
+const SubMenu = ({children, title , onBackHandler}) => {
+  const wrappedNavigation = Children.map(children, child => {
+    if (child.type === Navigation) {
+      return (
+        <div>
+          <a className={styles.backLink} onClick={onBackHandler}>
+            <span className={styles.backArrow}><ArrowLeft/></span>
+            <span>Back</span>
+          </a>
+          <div className={styles.categoryLabel}>{title}</div>
+          {child.props.children}
+        </div>
+      );
+    }
+
+    return child;
+  });
 
   return (
-    <Link isActive={isActive} onClick={onSelectHandler}>
-      {title}
-    </Link>
+    <div>
+      {wrappedNavigation}
+    </div>
   );
 };
 
 SubMenu.defaultProps = {
-  isActive: false,
-  isOpen: false,
-  onSelectHandler: () => {},
   onBackHandler: () => {}
 };
 
 SubMenu.propTypes = {
   title: string.isRequired,
-  isActive: bool,
-  isOpen: bool,
-  onSelectHandler: func,
   onBackHandler: func,
-  children: children(once(Navigation))
+  children: node
 };
 
 export default SubMenu;

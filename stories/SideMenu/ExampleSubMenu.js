@@ -5,13 +5,17 @@ import {
 } from 'wix-style-react';
 import HelpIcon from '../../src/Icons/dist/components/Help';
 import ChatIcon from '../../src/Icons/dist/components/Chat';
-
+import TrashIcon from '../../src/Icons/dist/components/Trash3';
 
 export default () =>
   <div style={{width: 220, height: 700}}>
     <SideMenu>
       <SideMenu.Navigation>
-        <SideMenu.SubMenu isOpen title="Sub Menu">
+        <SideMenu.SubMenu title="Sub Menu">
+          <SideMenu.Logo>
+            <TrashIcon size="5em"/>
+            <h2>My Application</h2>
+          </SideMenu.Logo>
           <SideMenu.Navigation>
             <SideMenu.NavigationLink isActive onClick={() => console.log('#1 clicked')}>
               Link #1

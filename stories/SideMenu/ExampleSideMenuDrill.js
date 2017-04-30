@@ -22,7 +22,12 @@ const items = [
   { type: 'menu', id: 'SUB_MENU_2', title: 'Sub Menu #2', items: [
     { type: 'link', to: '//wix.com', title: 'link #2_1' },
     { type: 'link', to: '//wix.com', title: 'link #2_2' },
-    { type: 'link', to: '//wix.com', title: 'link #2_3' }
+    { type: 'link', to: '//wix.com', title: 'link #2_3' },
+    { type: 'menu', id: 'SUB_MENU_3', title: 'Sub Menu #3', items: [
+      { type: 'link', to: '//wix.com', title: 'link #3_1' },
+      { type: 'link', to: '//wix.com', title: 'link #3_2' },
+      { type: 'link', to: '//wix.com', title: 'link #3_3' }
+    ] }
   ] }
 ];
 
@@ -63,7 +68,15 @@ class ExampleSideMenuDrill extends React.Component {
   renderMenu(menu) {
     return (
       <SideMenuDrill.SubMenu key={menu.id} id={menu.id} title={menu.title}>
-        {this.renderNavigation(menu.items)}
+        <SideMenu.Logo>
+          <div onClick={() => console.log('Logo clicked')}>
+            <TrashIcon size="5em"/>
+            <h2 style={{color: '#fff'}}>Internal App</h2>
+          </div>
+        </SideMenu.Logo>
+        <SideMenu.Navigation>
+          {this.renderNavigation(menu.items)}
+        </SideMenu.Navigation>
       </SideMenuDrill.SubMenu>
     );
   }

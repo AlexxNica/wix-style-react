@@ -1,27 +1,36 @@
-import React from 'react';
-import {node, string} from 'prop-types';
+import React, {Children} from 'react';
+import {node, string, bool, func} from 'prop-types';
 import SideMenu from '../index';
 
-const SubMenu = ({children, title, ...rest}) => (
-  <SideMenu.SubMenu title={title} {...rest}>
-    <SideMenu.Navigation>
+const SubMenu = ({children, title, isOpen, isActive, onSelectHandler, ...rest}) => {
+  if (!isOpen) {
+    return (
+      <SideMenu.NavigationLink isActive={isActive} onClick={onSelectHandler}>
+        {title}
+      </SideMenu.NavigationLink>
+    );
+  }
+
+  return (
+    <SideMenu.SubMenu title={title} {...rest}>
       {children}
-    </SideMenu.Navigation>
-  </SideMenu.SubMenu>
-);
+    </SideMenu.SubMenu>
+  );
+};
 
 SubMenu.defaultProps = {
   isActive: false,
-  isOpen: false
+  isOpen: false,
+  onSelectHandler: () => {}
 };
 
 SubMenu.propTypes = {
   id: string.isRequired,
   title: string.isRequired,
-  children: node.isRequired,
-  header: node,
-  promotion: node,
-  footer: node,
+  isActive: bool,
+  isOpen: bool,
+  onSelectHandler: func,
+  children: node.isRequired
 };
 
 export default SubMenu;
