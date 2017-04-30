@@ -14,11 +14,12 @@ class SideMenuDrill extends WixComponent {
     this._processChildren({props: this.props}, menus);
 
     this.state = {
-      menus,
       currentMenuId: this.props.menuKey,
+      menus,
       previousMenuId: null,
       showMenuA: true,
-      slideDirection: SlideDirection.left
+      slideDirection: SlideDirection.left,
+      ...this.state
     };
   }
 
@@ -28,40 +29,91 @@ class SideMenuDrill extends WixComponent {
     this.setState({menus});
   }
 
+  _setSelectedItemMenu(selectedItemMenuId) {
+    if (!this.state) {
+      this.state = {currentMenuId: selectedItemMenuId, selectedItemMenuId};
+      return;
+    }
+
+    // returning to a selected menu item (force nav)
+    if (event && event.target.dataset.menuKey === selectedItemMenuId) {
+      this._navigateToMenu(selectedItemMenuId, SlideDirection.left);
+    }
+
+    if (this.state.selectedItemMenuId === selectedItemMenuId) {
+      return;
+    }
+
+    this.setState({selectedItemMenuId});
+    if (this.state.currentMenuId !== selectedItemMenuId) {
+      this._navigateToMenu(selectedItemMenuId, SlideDirection.left); // TODO: calculate if needs to slide left or right
+    }
+  }
+
   _navigateToMenu(nextMenuId, slideDirection) {
     const previousMenuId = this.state.currentMenuId;
     const showMenuA = !this.state.showMenuA;
     this.setState({currentMenuId: nextMenuId, previousMenuId, showMenuA, slideDirection});
   }
 
-  _alterMenu(menu, childrenClone, parentMenuKey) {
+  _selectFirstLinkChild(menu, event) {
+    let found = false;
+    Children.forEach(menu.props.children, child => {
+      if (!found && child.type === SideMenuDrill.Link) {
+        child.props.onClick && child.props.onClick(event);
+        found = true;
+      }
+
+      if (!found && child.props && child.props.children) {
+        this._selectFirstLinkChild(child, event);
+      }
+    });
+  }
+
+  _alterMenu(menu, childrenClone, parentMenuKey, isActive) {
     const defaultSubMenProps = {
       isOpen: false,
-      onSelectHandler: () => {
-        this._navigateToMenu(menu.props.menuKey, SlideDirection.left);
+      onSelectHandler: event => {
+        event.target.dataset.menuKey = menu.props.menuKey;
+        this._selectFirstLinkChild(menu, event);
       },
       onBackHandler: () => {
         this._navigateToMenu(parentMenuKey, SlideDirection.right);
-      }
+      },
+      isActive
     };
 
     return React.cloneElement(menu, defaultSubMenProps, childrenClone);
   }
 
-  _processChildren(menu, menus, parentMenuKey) {
+  _handleSubMenu(activeMenus, menu, parentMenuKey, childrenClone, menus) {
+    const isMenuActive = activeMenus[menu.props.menuKey];
+    if (isMenuActive) {
+      activeMenus[parentMenuKey] = true;
+    }
+
+    const menuClone = this._alterMenu(menu, childrenClone, parentMenuKey, isMenuActive);
+    menus[menuClone.props.menuKey] = menuClone;
+    return menuClone;
+  }
+
+  _processChildren(menu, menus, activeMenus = {}, parentMenuKey) {
     const childrenClone = Children.map(menu.props.children, child => {
       if (child.props && child.props.children) {
         const menuKey = menu.props.menuKey || parentMenuKey;
-        return this._processChildren(child, menus, menuKey);
+        return this._processChildren(child, menus, activeMenus, menuKey);
       }
 
       return child;
     });
 
+    if (menu.type === SideMenuDrill.Link && menu.props.isActive) {
+      this._setSelectedItemMenu(parentMenuKey);
+      activeMenus[parentMenuKey] = true;
+    }
+
     if (menu.props.menuKey) {
-      const menuClone = this._alterMenu(menu, childrenClone, parentMenuKey);
-      menus[menuClone.props.menuKey] = menuClone;
-      return menuClone;
+      return this._handleSubMenu(activeMenus, menu, parentMenuKey, childrenClone, menus);
     }
 
     return React.cloneElement(menu, {}, childrenClone);
@@ -69,9 +121,11 @@ class SideMenuDrill extends WixComponent {
 
   _renderNavigation(menu) {
     if (menu.props.menuKey === this.props.menuKey) {
+      // Render root items
       return menu.props.children;
     }
 
+    // Render open SubMenu
     return React.cloneElement(menu, {isOpen: true});
   }
 
