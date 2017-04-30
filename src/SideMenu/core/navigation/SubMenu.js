@@ -1,10 +1,10 @@
 import React, {Children} from 'react';
-import {string, func, bool, node} from 'prop-types';
+import {string, func, node} from 'prop-types';
 import Navigation from './index';
 import {ArrowLeft} from '../../../Icons/dist';
 import styles from './styles.scss';
 
-const SubMenu = ({children, title , onBackHandler}) => {
+const SubMenu = ({children, title, onBackHandler}) => {
   const wrappedNavigation = Children.map(children, child => {
     if (child.type === Navigation) {
       return (

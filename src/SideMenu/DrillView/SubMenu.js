@@ -1,4 +1,4 @@
-import React, {Children} from 'react';
+import React from 'react';
 import {node, string, bool, func} from 'prop-types';
 import SideMenu from '../index';
 
