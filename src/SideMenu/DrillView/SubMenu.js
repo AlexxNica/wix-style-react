@@ -25,7 +25,7 @@ SubMenu.defaultProps = {
 };
 
 SubMenu.propTypes = {
-  id: string.isRequired,
+  menuKey: string.isRequired,
   title: string.isRequired,
   isActive: bool,
   isOpen: bool,

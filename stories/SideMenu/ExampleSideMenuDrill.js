@@ -14,16 +14,16 @@ let counter = 3;
 const items = [
   { type: 'link', to: '//wix.com', title: 'link #0_1' },
   { type: 'link', to: '//wix.com', title: 'link #0_2' },
-  { type: 'menu', id: 'SUB_MENU_1', title: 'Sub Menu #1', items: [
+  { type: 'menu', title: 'Sub Menu #1', items: [
     { type: 'link', to: '//wix.com', title: 'link #1_1' },
     { type: 'link', to: '//wix.com', title: 'link #1_2' },
     { type: 'link', to: '//wix.com', title: 'link #1_3' }
   ] },
-  { type: 'menu', id: 'SUB_MENU_2', title: 'Sub Menu #2', items: [
+  { type: 'menu', title: 'Sub Menu #2', items: [
     { type: 'link', to: '//wix.com', title: 'link #2_1' },
     { type: 'link', to: '//wix.com', title: 'link #2_2' },
     { type: 'link', to: '//wix.com', title: 'link #2_3' },
-    { type: 'menu', id: 'SUB_MENU_3', title: 'Sub Menu #3', items: [
+    { type: 'menu', title: 'Sub Menu #3', items: [
       { type: 'link', to: '//wix.com', title: 'link #3_1' },
       { type: 'link', to: '//wix.com', title: 'link #3_2' },
       { type: 'link', to: '//wix.com', title: 'link #3_3' }
@@ -67,7 +67,7 @@ class ExampleSideMenuDrill extends React.Component {
 
   renderMenu(menu) {
     return (
-      <SideMenuDrill.SubMenu key={menu.id} id={menu.id} title={menu.title}>
+      <SideMenuDrill.SubMenu key={menu.title} menuKey={menu.title} title={menu.title}>
         <SideMenu.Logo>
           <div onClick={() => console.log('Logo clicked')}>
             <TrashIcon size="5em"/>
@@ -108,7 +108,7 @@ class ExampleSideMenuDrill extends React.Component {
     return (
       <div>
         <div style={{width: 220, height: 700}}>
-          <SideMenuDrill id="ROOT">
+          <SideMenuDrill>
             <SideMenu.Logo>
               <div onClick={() => console.log('Logo clicked')}>
                 <TrashIcon size="5em"/>

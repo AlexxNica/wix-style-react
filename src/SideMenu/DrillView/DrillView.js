@@ -12,11 +12,11 @@ class SideMenuDrill extends WixComponent {
     super(props);
 
     const menus = {};
-    this._processChildren({props: this.props, type: 'root'}, menus);
+    this._processChildren({props: this.props}, menus);
 
     this.state = {
       menus,
-      currentMenuId: props.selectedId || this.props.id,
+      currentMenuId: this.props.menuKey,
       previousMenuId: null,
       showMenuA: true,
       slideDirection: SlideDirection.left
@@ -25,7 +25,7 @@ class SideMenuDrill extends WixComponent {
 
   componentWillReceiveProps(nextProps) {
     const menus = {};
-    this._processChildren({props: nextProps, type: 'root'}, menus);
+    this._processChildren({props: nextProps}, menus);
     this.setState({menus});
   }
 
@@ -35,40 +35,41 @@ class SideMenuDrill extends WixComponent {
     this.setState({currentMenuId: nextMenuId, previousMenuId, showMenuA, slideDirection});
   }
 
-  _alterMenu(menu, childrenClone, parent) {
+  _alterMenu(menu, childrenClone, parentMenuKey) {
     const defaultSubMenProps = {
       isOpen: false,
       onSelectHandler: () => {
-        this._navigateToMenu(menu.props.id, SlideDirection.left);
+        this._navigateToMenu(menu.props.menuKey, SlideDirection.left);
       },
       onBackHandler: () => {
-        this._navigateToMenu(parent.props.id, SlideDirection.right);
+        this._navigateToMenu(parentMenuKey, SlideDirection.right);
       }
     };
 
     return React.cloneElement(menu, defaultSubMenProps, childrenClone);
   }
 
-  _processChildren(menu, menus, parent) {
+  _processChildren(menu, menus, parentMenuKey) {
     const childrenClone = Children.map(menu.props.children, child => {
       if (child.props && child.props.children) {
-        return this._processChildren(child, menus, menu);
+        const menuKey = menu.props.menuKey || parentMenuKey;
+        return this._processChildren(child, menus, menuKey);
       }
 
       return child;
     });
 
-    if (menu.type === SubMenu || menu.type === 'root') {
-      const menuClone = this._alterMenu(menu, childrenClone, parent);
-      menus[menuClone.props.id] = menuClone;
+    if (menu.props.menuKey) {
+      const menuClone = this._alterMenu(menu, childrenClone, parentMenuKey);
+      menus[menuClone.props.menuKey] = menuClone;
       return menuClone;
     }
 
-    return menu;
+    return React.cloneElement(menu, {}, childrenClone);
   }
 
   _renderNavigation(menu) {
-    if (menu.props.id === this.props.id) {
+    if (menu.props.menuKey === this.props.menuKey) {
       return menu.props.children;
     }
 
@@ -106,8 +107,12 @@ class SideMenuDrill extends WixComponent {
   }
 }
 
+SideMenuDrill.defaultProps = {
+  menuKey: 'root'
+};
+
 SideMenuDrill.propTypes = {
-  id: string.isRequired,
+  menuKey: string,
   children: node
 };
 

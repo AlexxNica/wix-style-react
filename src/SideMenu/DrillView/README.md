@@ -7,23 +7,23 @@ The menus are rendered using the SideMenu design.
 ## Usage
 
 ```html
-<SideMenuDrill id="ROOT">
+<SideMenuDrill>
   <SideMenu.Logo>
     <h2>My Application</h2>
   </SideMenu.Logo>
   <SideMenuDrill.Link to="https://www.wix.com">Link #1</SideMenuDrill.Link>
   <SideMenuDrill.Link to="https://www.wix.com">Link #2</SideMenuDrill.Link>
-  <SideMenuDrill.SubMenu id="SUB_MENU_1" title="Sub Menu #1">
+  <SideMenuDrill.SubMenu menuKey="SUB_MENU_1" title="Sub Menu #1">
     <SideMenu.Logo>
       <h2>My Internal Application</h2>
     </SideMenu.Logo>
     <SideMenuDrill.Link to="https://www.wix.com">Link #3</SideMenuDrill.Link>
     <SideMenuDrill.Link to="https://www.wix.com">Link #4</SideMenuDrill.Link>
   </SideMenuDrill.SubMenu>
-  <SideMenuDrill.SubMenu id="SUB_MENU_2" title="Sub Menu #2">
+  <SideMenuDrill.SubMenu menuKey="SUB_MENU_2" title="Sub Menu #2">
     <SideMenuDrill.Link to="https://www.wix.com">Link #5</SideMenuDrill.Link>
     <SideMenuDrill.Link to="https://www.wix.com">Link #6</SideMenuDrill.Link>
-    <SideMenuDrill.SubMenu id="SUB_MENU_3" title="Sub Menu #3">
+    <SideMenuDrill.SubMenu menuKey="SUB_MENU_3" title="Sub Menu #3">
       <SideMenuDrill.Link to="https://www.wix.com">Link #7</SideMenuDrill.Link>
       <SideMenuDrill.Link to="https://www.wix.com">Link #8</SideMenuDrill.Link>
     </SideMenuDrill.SubMenu>
@@ -35,7 +35,7 @@ The menus are rendered using the SideMenu design.
 
 | propName          | propType | defaultValue | isRequired | description                                                                        |
 | -                 | -        | -            | -          | -                                                                                  |
-| id                | string   | -            | true       | A unique ID for the menu                                                           |
+| menuKey           | string   | root         | -          | A unique key for the menu                                                          |
 | children          | node     | -            | -          | A list of navigation items of types `SideMenuDrill.Link`, `SideMenuDrill.SubMenu`  |
 
 ## Components
@@ -57,6 +57,6 @@ A container of sub navigation items
 
 | propName          | propType | defaultValue | isRequired | description                                                                        |
 | -                 | -        | -            | -          | -                                                                                  |
-| id                | string   | -            | true       | A unique ID for the menu                                                           |
+| menuKey           | string   | -            | true       | A unique key for the menu                                                          |
 | title             | string   | -            | true       | The sub menu's title                                                               |
 | children          | node     | -            | true       | A list of navigation items of types `SideMenuDrill.Link`, `SideMenuDrill.SubMenu`  |
