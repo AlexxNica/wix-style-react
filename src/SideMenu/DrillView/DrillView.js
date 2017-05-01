@@ -10,34 +10,39 @@ class SideMenuDrill extends WixComponent {
   constructor(props) {
     super(props);
 
-    const menus = {};
-    this._processChildren({props: this.props}, menus);
-
-    this.state = {
+    const state = {
+      menus: {},
+      activeMenus: {},
       currentMenuId: this.props.menuKey,
-      menus,
       previousMenuId: null,
       showMenuA: true,
-      slideDirection: SlideDirection.left,
-      ...this.state
+      slideDirection: SlideDirection.left
     };
+
+    this.processChildren({props: this.props}, state);
+    this.state = state;
   }
 
   componentWillReceiveProps(nextProps) {
-    const menus = {};
-    this._processChildren({props: nextProps}, menus);
-    this.setState({menus});
+    const state = {
+      menus: {},
+      activeMenus: {}
+    };
+
+    this.processChildren({props: nextProps}, state);
+    this.setState(state);
   }
 
-  _setSelectedItemMenu(selectedItemMenuId) {
+  setSelectedItemMenu(selectedItemMenuId, state) {
+    // initial selected menu
     if (!this.state) {
-      this.state = {currentMenuId: selectedItemMenuId, selectedItemMenuId};
+      Object.assign(state, {currentMenuId: selectedItemMenuId, selectedItemMenuId});
       return;
     }
 
-    // returning to a selected menu item (force nav)
-    if (event && event.target.dataset.menuKey === selectedItemMenuId) {
-      this._navigateToMenu(selectedItemMenuId, SlideDirection.left);
+    // returning to an already selected menu item (force nav)
+    if (event && event.target.dataset.menuKey === selectedItemMenuId) { //eslint-disable-line no-restricted-globals
+      this.navigateToMenu(selectedItemMenuId, SlideDirection.left);
     }
 
     if (this.state.selectedItemMenuId === selectedItemMenuId) {
@@ -46,17 +51,17 @@ class SideMenuDrill extends WixComponent {
 
     this.setState({selectedItemMenuId});
     if (this.state.currentMenuId !== selectedItemMenuId) {
-      this._navigateToMenu(selectedItemMenuId, SlideDirection.left); // TODO: calculate if needs to slide left or right
+      this.navigateToMenu(selectedItemMenuId, SlideDirection.left); // TODO: calculate if needs to slide left or right
     }
   }
 
-  _navigateToMenu(nextMenuId, slideDirection) {
+  navigateToMenu(nextMenuId, slideDirection) {
     const previousMenuId = this.state.currentMenuId;
     const showMenuA = !this.state.showMenuA;
     this.setState({currentMenuId: nextMenuId, previousMenuId, showMenuA, slideDirection});
   }
 
-  _selectFirstLinkChild(menu, event) {
+  selectFirstLinkChild(menu, event) {
     let found = false;
     Children.forEach(menu.props.children, child => {
       if (!found && child.type === SideMenuDrill.Link) {
@@ -65,20 +70,20 @@ class SideMenuDrill extends WixComponent {
       }
 
       if (!found && child.props && child.props.children) {
-        this._selectFirstLinkChild(child, event);
+        this.selectFirstLinkChild(child, event);
       }
     });
   }
 
-  _alterMenu(menu, childrenClone, parentMenuKey, isActive) {
+  alterMenu(menu, childrenClone, parentMenuKey, isActive) {
     const defaultSubMenProps = {
       isOpen: false,
       onSelectHandler: event => {
         event.target.dataset.menuKey = menu.props.menuKey;
-        this._selectFirstLinkChild(menu, event);
+        this.selectFirstLinkChild(menu, event);
       },
       onBackHandler: () => {
-        this._navigateToMenu(parentMenuKey, SlideDirection.right);
+        this.navigateToMenu(parentMenuKey, SlideDirection.right);
       },
       isActive
     };
@@ -86,40 +91,44 @@ class SideMenuDrill extends WixComponent {
     return React.cloneElement(menu, defaultSubMenProps, childrenClone);
   }
 
-  _handleSubMenu(activeMenus, menu, parentMenuKey, childrenClone, menus) {
-    const isMenuActive = activeMenus[menu.props.menuKey];
+  cloneSubMenu(menu, state, parentMenuKey, childrenClone) {
+    const isMenuActive = state.activeMenus[menu.props.menuKey];
     if (isMenuActive) {
-      activeMenus[parentMenuKey] = true;
+      state.activeMenus[parentMenuKey] = true;
     }
 
-    const menuClone = this._alterMenu(menu, childrenClone, parentMenuKey, isMenuActive);
-    menus[menuClone.props.menuKey] = menuClone;
+    const menuClone = this.alterMenu(menu, childrenClone, parentMenuKey, isMenuActive);
+    state.menus[menuClone.props.menuKey] = menuClone;
     return menuClone;
   }
 
-  _processChildren(menu, menus, activeMenus = {}, parentMenuKey) {
-    const childrenClone = Children.map(menu.props.children, child => {
-      if (child.props && child.props.children) {
-        const menuKey = menu.props.menuKey || parentMenuKey;
-        return this._processChildren(child, menus, activeMenus, menuKey);
-      }
-
-      return child;
-    });
-
+  cloneChild(menu, state, parentMenuKey, childrenClone) {
     if (menu.type === SideMenuDrill.Link && menu.props.isActive) {
-      this._setSelectedItemMenu(parentMenuKey);
-      activeMenus[parentMenuKey] = true;
+      this.setSelectedItemMenu(parentMenuKey, state);
+      state.activeMenus[parentMenuKey] = true;
     }
 
     if (menu.props.menuKey) {
-      return this._handleSubMenu(activeMenus, menu, parentMenuKey, childrenClone, menus);
+      return this.cloneSubMenu(menu, state, parentMenuKey, childrenClone);
     }
 
     return React.cloneElement(menu, {}, childrenClone);
   }
 
-  _renderNavigation(menu) {
+  processChildren(menu, state, parentMenuKey) {
+    const childrenClone = Children.map(menu.props.children, child => {
+      if (child.props && child.props.children) {
+        const menuKey = menu.props.menuKey || parentMenuKey;
+        return this.processChildren(child, state, menuKey);
+      }
+
+      return child;
+    });
+
+    return this.cloneChild(menu, state, parentMenuKey, childrenClone);
+  }
+
+  renderNavigation(menu) {
     if (menu.props.menuKey === this.props.menuKey) {
       // Render root items
       return menu.props.children;
@@ -129,10 +138,10 @@ class SideMenuDrill extends WixComponent {
     return React.cloneElement(menu, {isOpen: true});
   }
 
-  _renderMenu(menu) {
+  renderMenu(menu) {
     return (
       <div className={styles.drillViewPanel}>
-        {this._renderNavigation(menu)}
+        {this.renderNavigation(menu)}
       </div>
     );
   }
@@ -149,10 +158,10 @@ class SideMenuDrill extends WixComponent {
       <SideMenu>
         <div className={styles.drillViewContainer}>
           <SlideAnimation direction={this.state.slideDirection} animateAppear={false}>
-            { showMenuA ? this._renderMenu(menuA) : null }
+            { showMenuA ? this.renderMenu(menuA) : null }
           </SlideAnimation>
           <SlideAnimation direction={this.state.slideDirection} animateAppear={false}>
-            { !showMenuA ? this._renderMenu(menuB) : null }
+            { !showMenuA ? this.renderMenu(menuB) : null }
           </SlideAnimation>
         </div>
       </SideMenu>
