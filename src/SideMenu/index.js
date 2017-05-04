@@ -1,20 +1,23 @@
 import SideMenu from './core/SideMenu';
 
-import Logo from './core/logo';
+import Header from './core/Header';
 import Navigation from './core/navigation';
-import NavigationLink from './core/navigation/link';
-import NavigationSeparator from './core/navigation/separator';
-import SubMenu from './core/navigation/SubMenu';
-import Promotion from './core/promotion';
+import NavigationLink from './core/navigation/Link';
+import NavigationBackLink from './core/navigation/BackLink';
+import NavigationSeparator from './core/navigation/Separator';
+import NavigationCategory from './core/navigation/Category';
+import Promotion from './core/Promotion';
 import Footer from './core/footer';
-import FooterLink from './core/footer/link';
-import FooterTinyLink from './core/footer/tiny-link';
+import FooterLink from './core/footer/Link';
+import FooterTinyLink from './core/footer/TinyLink';
 
-SideMenu.Logo = Logo;
+SideMenu.Logo = Header;
+SideMenu.Header = Header;
 SideMenu.Navigation = Navigation;
 SideMenu.NavigationLink = NavigationLink;
+SideMenu.NavigationBackLink = NavigationBackLink;
 SideMenu.NavigationSeparator = NavigationSeparator;
-SideMenu.SubMenu = SubMenu;
+SideMenu.NavigationCategory = NavigationCategory;
 SideMenu.Promotion = Promotion;
 SideMenu.Footer = Footer;
 SideMenu.FooterLink = FooterLink;

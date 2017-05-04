@@ -9,6 +9,7 @@ const Link = ({children, isDiminishedHover, isActive, ...rest}) =>
       [styles.linkActive]: isActive,
       [styles.linkDiminishedHover]: isDiminishedHover
     })}
+    data-hook="menu-navigation-link"
     {...rest}
     >
     {children}

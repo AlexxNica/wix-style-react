@@ -68,15 +68,15 @@ class ExampleSideMenuDrill extends React.Component {
   renderMenu(menu) {
     return (
       <SideMenuDrill.SubMenu key={menu.title} menuKey={menu.title} title={menu.title}>
-        <SideMenu.Logo>
-          <div onClick={() => console.log('Logo clicked')}>
+        <SideMenu.Header>
+          <div onClick={() => console.log('Header clicked')}>
             <TrashIcon size="5em"/>
             <h2 style={{color: '#fff'}}>Internal App</h2>
           </div>
-        </SideMenu.Logo>
-        <SideMenu.Navigation>
+        </SideMenu.Header>
+        <SideMenuDrill.Navigation>
           {this.renderNavigation(menu.items)}
-        </SideMenu.Navigation>
+        </SideMenuDrill.Navigation>
       </SideMenuDrill.SubMenu>
     );
   }
@@ -109,12 +109,12 @@ class ExampleSideMenuDrill extends React.Component {
       <div>
         <div style={{width: 220, height: 700}}>
           <SideMenuDrill>
-            <SideMenu.Logo>
-              <div onClick={() => console.log('Logo clicked')}>
+            <SideMenu.Header>
+              <div onClick={() => console.log('Header clicked')}>
                 <TrashIcon size="5em"/>
                 <h2 style={{color: '#fff'}}>My Application</h2>
               </div>
-            </SideMenu.Logo>
+            </SideMenu.Header>
             {this.renderNavigation(items)}
             <SideMenu.Promotion>
               <Button theme="fullpurple" onClick={() => console.log('Promotion button clicked!')}>

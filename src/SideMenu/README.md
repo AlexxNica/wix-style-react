@@ -10,9 +10,9 @@ yet to be done:
 
 ## Components
 
-### Logo `<SideMenu.Logo/>`
+### Header `<SideMenu.Header/>` (alias: `<SideMenu.Logo/>`)
 
-Container for your logo (or anything you want)
+Container for your header (or anything you want)
 
 | propName | propType | defaultValue | isRequired | description |
 | -        | -        | -            | -          | -           |
@@ -40,27 +40,29 @@ Main navigation item
 | children          | node     | -            | -          | -                                                                                  |
 | ...rest           | *        | -            | -          | any other prop will be added to root element (e.g. `onClick`, `onMouseEnter` etc.) |
 
+### NavigationBackLink `<SideMenu.NavigationBackLink />`
+
+Sub menu back link
+
+| propName          | propType | defaultValue | isRequired | description                                                                                             |
+| -                 | -        | -            | -          | -                                                                                                       |
+| onBackHandler     | func     | noop         | -          | A callback to call when the sub menu back button is clicked                                             |
+
 ### NavigationSeparator `<SideMenu.NavigationSeparator />`
 
-thin line to separate nav items
+Thin line to separate nav items
 
 | propName | propType | defaultValue | isRequired | description |
 | -        | -        | -            | -          | -           |
 | children | node     | -            | -          | -           |
 
-### SubMenu `<SideMenu.SubMenu />`
+### NavigationCategory `<SideMenu.NavigationCategory />`
 
-A container of sub navigation items
+The category of a group of links
 
-| propName          | propType | defaultValue | isRequired | description                                                                                             |
-| -                 | -        | -            | -          | -                                                                                                       |
-| title             | string   | -            | true       | the sub menu's title (will appear both in closed & opened modes)                                        |
-| isActive          | bool     | false        | -          | slightly different styling to indicate active link (closed mode only)                                   |
-| isOpen            | bool     | false        | -          | when set to `false` the sub menu will appear like a `Link`, otherwise it will render the sub navigation |
-| onSelectHandler   | func     | noop         | -          | A callback to call when the sub menu anchor is clicked                                                  |
-| onBackHandler     | func     | noop         | -          | A callback to call when the sub menu back button is clicked                                             |
-| children          | node     | -            | -          | sub `Navigation` menu                                                                                   |
-| ...rest           | *        | -            | -          | any other prop will be added to root element (e.g. `onClick`, `onMouseEnter` etc.)                      |
+| propName          | propType | defaultValue | isRequired | description                                                      |
+| -                 | -        | -            | -          | -                                                                |
+| title             | string   | -            | true       | the sub menu's title (will appear both in closed & opened modes) |
 
 ### Promotion `<SideMenu.Promotion />`
 
@@ -96,8 +98,8 @@ stylized link
 * `<SideMenu/>` doesn't care how and where you render it. It takes full
 width & height so it's up to you to set parent styling appropriately
 
-* `<SideMenu/>` has no padding or margin. So, if you want e.g. logo to not stick
-to the top, adjust padding or margin to the children of `<SideMenu.Logo/>`
+* `<SideMenu/>` has no padding or margin. So, if you want e.g. header to not stick
+to the top, adjust padding or margin to the children of `<SideMenu.Header/>`
 
 * when height is too little, `<SideMenu/>` add scrollbar to `<SideMenu.Navigation/>`
 

@@ -8,25 +8,31 @@ The menus are rendered using the SideMenu design.
 
 ```html
 <SideMenuDrill>
-  <SideMenu.Logo>
+  <SideMenu.Header>
     <h2>My Application</h2>
-  </SideMenu.Logo>
+  </SideMenu.Header>
   <SideMenuDrill.Link to="https://www.wix.com">Link #1</SideMenuDrill.Link>
   <SideMenuDrill.Link to="https://www.wix.com">Link #2</SideMenuDrill.Link>
   <SideMenuDrill.SubMenu menuKey="SUB_MENU_1" title="Sub Menu #1">
-    <SideMenu.Logo>
+    <SideMenu.Header>
       <h2>My Internal Application</h2>
-    </SideMenu.Logo>
-    <SideMenuDrill.Link to="https://www.wix.com">Link #3</SideMenuDrill.Link>
-    <SideMenuDrill.Link to="https://www.wix.com">Link #4</SideMenuDrill.Link>
+    </SideMenu.Header>
+    <SideMenuDrill.Navigation>
+      <SideMenuDrill.Link to="https://www.wix.com">Link #3</SideMenuDrill.Link>
+      <SideMenuDrill.Link to="https://www.wix.com">Link #4</SideMenuDrill.Link>
+    </SideMenuDrill.Navigation>
   </SideMenuDrill.SubMenu>
   <SideMenuDrill.SubMenu menuKey="SUB_MENU_2" title="Sub Menu #2">
-    <SideMenuDrill.Link to="https://www.wix.com">Link #5</SideMenuDrill.Link>
-    <SideMenuDrill.Link to="https://www.wix.com">Link #6</SideMenuDrill.Link>
-    <SideMenuDrill.SubMenu menuKey="SUB_MENU_3" title="Sub Menu #3">
-      <SideMenuDrill.Link to="https://www.wix.com">Link #7</SideMenuDrill.Link>
-      <SideMenuDrill.Link to="https://www.wix.com">Link #8</SideMenuDrill.Link>
-    </SideMenuDrill.SubMenu>
+    <SideMenuDrill.Navigation>
+      <SideMenuDrill.Link to="https://www.wix.com">Link #5</SideMenuDrill.Link>
+      <SideMenuDrill.Link to="https://www.wix.com">Link #6</SideMenuDrill.Link>
+      <SideMenuDrill.SubMenu menuKey="SUB_MENU_3" title="Sub Menu #3">
+        <SideMenuDrill.Navigation>
+          <SideMenuDrill.Link to="https://www.wix.com">Link #7</SideMenuDrill.Link>
+          <SideMenuDrill.Link to="https://www.wix.com">Link #8</SideMenuDrill.Link>
+        </SideMenuDrill.Navigation>
+      </SideMenuDrill.SubMenu>
+    </SideMenuDrill.Navigation>
   </SideMenuDrill.SubMenu>
 </SideMenuDrill>
 ```
@@ -55,8 +61,12 @@ Main navigation item
 
 A container of sub navigation items
 
-| propName          | propType | defaultValue | isRequired | description                                                                        |
-| -                 | -        | -            | -          | -                                                                                  |
-| menuKey           | string   | -            | true       | A unique key for the menu                                                          |
-| title             | string   | -            | true       | The sub menu's title                                                               |
-| children          | node     | -            | true       | A list of navigation items of types `SideMenuDrill.Link`, `SideMenuDrill.SubMenu`  |
+| propName          | propType | defaultValue | isRequired | description                                                                                             |
+| -                 | -        | -            | -          | -                                                                                                       |
+| menuKey           | string   | -            | true       | A unique key for the menu                                                                               |
+| title             | string   | -            | true       | The sub menu's title                                                                                    |
+| isActive          | bool     | false        | -          | slightly different styling to indicate active link (closed mode only)                                   |
+| isOpen            | bool     | false        | -          | when set to `false` the sub menu will appear like a `Link`, otherwise it will render the sub navigation |
+| onSelectHandler   | func     | noop         | -          | A callback to call when the sub menu anchor is clicked                                                  |
+| onBackHandler     | func     | noop         | -          | A callback to call when the sub menu back button is clicked                                             |
+| children          | node     | -            | true       | A list of child nodes including `SideMenu.Navigation` containing more links & sub menus                 |
