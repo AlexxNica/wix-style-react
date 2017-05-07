@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import {mount} from 'enzyme';
-import {Container, Row, AutoAdjustedRow, Col, Card} from './Grid';
+import {Col} from './Grid';
 
 describe('Grid', () => {
 
