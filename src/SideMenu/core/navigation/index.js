@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 import styles from './styles.scss';
 
 const Navigation = ({children}) =>
-  <div className={styles.navigation}>
+  <div className={styles.navigation} data-hook="menu-navigation">
     {children}
   </div>;
 

@@ -3,7 +3,7 @@ import {node} from 'prop-types';
 import styles from './styles.scss';
 
 const SideMenu = ({children}) =>
-  <div className={styles.root}>
+  <div className={styles.root} data-hook="side-menu">
     {children}
   </div>;
 

@@ -69,4 +69,5 @@ A container of sub navigation items
 | isOpen            | bool     | false        | -          | when set to `false` the sub menu will appear like a `Link`, otherwise it will render the sub navigation |
 | onSelectHandler   | func     | noop         | -          | A callback to call when the sub menu anchor is clicked                                                  |
 | onBackHandler     | func     | noop         | -          | A callback to call when the sub menu back button is clicked                                             |
+| backLabel         | string   | Back         | -          | The text that will be displayed on the back link                                                        |
 | children          | node     | -            | true       | A list of child nodes including `SideMenu.Navigation` containing more links & sub menus                 |

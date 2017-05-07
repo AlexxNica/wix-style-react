@@ -1,17 +1,18 @@
 import React from 'react';
 import {ArrowLeft} from '../../../Icons/dist';
-import {func} from 'prop-types';
+import {func, node} from 'prop-types';
 import styles from './styles.scss';
 
-const BackLink = ({onBackHandler}) => (
+const BackLink = ({onBackHandler, children}) => (
   <a className={styles.backLink} onClick={onBackHandler} data-hook="menu-navigation-back-link">
     <span className={styles.backArrow}><ArrowLeft/></span>
-    <span>Back</span>
+    <span>{children}</span>
   </a>
 );
 
 BackLink.propTypes = {
-  onBackHandler: func
+  onBackHandler: func,
+  children: node
 };
 
 export default BackLink;
