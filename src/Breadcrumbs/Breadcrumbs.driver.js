@@ -9,6 +9,7 @@ const breadcrumbsDriverFactory = ({element, wrapper, component}) => {
 
   return {
     exists: () => !!element,
+    breadcrumbsLength: () => items.childNodes.length,
     breadcrumbContentAt: position => optionAt(position).textContent,
     clickBreadcrumbAt: position => ReactTestUtils.Simulate.click(optionAt(position)),
     getActiveItemId: () => {
@@ -20,6 +21,7 @@ const breadcrumbsDriverFactory = ({element, wrapper, component}) => {
     isOnWhiteBackground: () => isClassExists(element, 'onWhiteBackground'),
     isOnGrayBackground: () => isClassExists(element, 'onGrayBackground'),
     getLabelClassList: position => optionAt(position).querySelector('label').className,
+    isActiveLinkAt: index => !!optionAt(index).querySelector('a'),
     setProps: props => {
       const ClonedWithProps = React.cloneElement(component, Object.assign({}, component.props, props), ...(component.props.children || []));
       ReactDOM.render(<div ref={r => element = r}>{ClonedWithProps}</div>, wrapper);
@@ -28,4 +30,3 @@ const breadcrumbsDriverFactory = ({element, wrapper, component}) => {
 };
 
 export default breadcrumbsDriverFactory;
-

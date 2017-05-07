@@ -9,6 +9,7 @@
 | items | array of objects (see item)| - | + | Specifies items for breadcrumbs |
 | size | string ('medium', 'large') | 'medium' | - | size of items |
 | theme | string ('onWhiteBackground', 'onGrayBackground', 'onDarkBackground') | 'onGrayBackground' | - | Specifies breadcrubms background and font colors |
+| textAlign | string | 'center' | - | text-align property |
 | onClick | func | - | - | callback on item click |
 
 ## Item
@@ -17,6 +18,7 @@
 | id | string or number| - | + | Specifies the item id |
 | link | string | - | - | Optional link to be called on click |
 | value | string or node | - | + | Value to be shown on breadcrumb |
+| customElement | element | - | - | A custom item which will be rendered |
 
 ## Breadcrumbs Path Factory
 ```javascript

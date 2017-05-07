@@ -10,7 +10,14 @@ import ActionButton from './ActionButton';
 
 export const LOCAL_NOTIFICATION = 'local';
 export const GLOBAL_NOTIFICATION = 'global';
+export const STICKY_NOTIFICATION = 'sticky';
 export const DEFAULT_TIMEOUT = 6000;
+
+export const notificationTypeToPosition = {
+  [LOCAL_NOTIFICATION]: 'absolute',
+  [GLOBAL_NOTIFICATION]: 'relative',
+  [STICKY_NOTIFICATION]: 'fixed'
+};
 
 const animationsTimeouts = {
   enter: 500,
@@ -49,14 +56,14 @@ class Notification extends WixComponent {
       hideByTimer: false
     };
 
-    this.startCloseTimer();
+    this.startCloseTimer(props);
   }
 
-  startCloseTimer() {
-    if (this.props.type === LOCAL_NOTIFICATION) {
+  startCloseTimer({type, timeout}) {
+    if (type !== GLOBAL_NOTIFICATION) {
       this.closeTimeout = setTimeout(() => {
         this.hideNotificationOnTimeout();
-      }, this.props.timeout || DEFAULT_TIMEOUT);
+      }, timeout || DEFAULT_TIMEOUT);
     }
   }
 
@@ -92,8 +99,12 @@ class Notification extends WixComponent {
     if (nextProps.show) {
       this.bypassCloseFlags();
       this.clearCloseTimeout();
-      this.startCloseTimer();
+      this.startCloseTimer(nextProps);
     }
+  }
+
+  componentWillUnmount() {
+    this.clearCloseTimeout();
   }
 
   shouldShowNotification() {
@@ -107,7 +118,7 @@ class Notification extends WixComponent {
       size,
     } = this.props;
 
-    const position = type === GLOBAL_NOTIFICATION ? 'relative' : 'absolute';
+    const position = notificationTypeToPosition[type];
 
     return classNames({
       [css.notificationWrapper]: true,
@@ -196,7 +207,7 @@ Notification.propTypes = {
   show: PropTypes.bool,
   theme: PropTypes.oneOf(['standard', 'error', 'success', 'warning']),
   size: PropTypes.oneOf(['small', 'big']),
-  type: PropTypes.oneOf([GLOBAL_NOTIFICATION, LOCAL_NOTIFICATION]),
+  type: PropTypes.oneOf([GLOBAL_NOTIFICATION, LOCAL_NOTIFICATION, STICKY_NOTIFICATION]),
   timeout: PropTypes.number,
   zIndex: PropTypes.number,
   onClose: PropTypes.func,
