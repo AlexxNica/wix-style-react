@@ -81,19 +81,14 @@ class Col extends Component {
     md: PropTypes.number,
     lg: PropTypes.number,
     xl: PropTypes.number,
-    hiddenXs: PropTypes.string,
-    hiddenSm: PropTypes.string,
-    hiddenMd: PropTypes.string,
-    hiddenLg: PropTypes.string,
-    hiddenXl: PropTypes.string,
   };
 
-  isUpDown(str) {
+  isVisibleHidden(str) {
     if (!str) {
       return false;
     }
     str = str.toLowerCase();
-    return str.toLowerCase() === 'up' || str === 'down';
+    return str.toLowerCase() === 'hidden' || str === 'visible';
   }
 
   isLegalCol(numStr) {
@@ -102,10 +97,6 @@ class Col extends Component {
     }
     const num = Number(numStr);
     return Number.isInteger(num) && num > 0 && num <= 12;
-  }
-
-  capitilizeFirstLetter(str) {
-    return str ? str.toLowerCase().replace(/(^| )(\w)/g, s => s.toUpperCase()) : str;
   }
 
   render() {
@@ -119,11 +110,10 @@ class Col extends Component {
       {[styles[`colMd${this.props.md}`]]: this.isLegalCol(this.props.md)},
       {[styles[`colLg${this.props.lg}`]]: this.isLegalCol(this.props.lg)},
       {[styles[`colXl${this.props.xl}`]]: this.isLegalCol(this.props.xl)},
-      {[styles[`hiddenXs` + this.capitilizeFirstLetter(this.props.hiddenXs)]]: this.isUpDown(this.props.hiddenXs)},
-      {[styles[`hiddenSm` + this.capitilizeFirstLetter(this.props.hiddenSm)]]: this.isUpDown(this.props.hiddenSm)},
-      {[styles[`hiddenMd` + this.capitilizeFirstLetter(this.props.hiddenMd)]]: this.isUpDown(this.props.hiddenMd)},
-      {[styles[`hiddenLg` + this.capitilizeFirstLetter(this.props.hiddenLg)]]: this.isUpDown(this.props.hiddenLg)},
-      {[styles[`hiddenXl` + this.capitilizeFirstLetter(this.props.hiddenXl)]]: this.isUpDown(this.props.hiddenXl)}
+      {[styles[`${this.props.xs}Xs`]]: this.isVisibleHidden(this.props.xs)},
+      {[styles[`${this.props.sm}Sm`]]: this.isVisibleHidden(this.props.sm)},
+      {[styles[`${this.props.md}Md`]]: this.isVisibleHidden(this.props.md)},
+      {[styles[`${this.props.lg}Lg`]]: this.isVisibleHidden(this.props.lg)},
     );
 
     return (
