@@ -79,7 +79,10 @@ class SideMenuDrill extends WixComponent {
     const defaultSubMenProps = {
       isOpen: false,
       onSelectHandler: event => {
-        event.target.dataset.menuKey = menu.props.menuKey;
+        if (event && event.target) {
+          event.target.dataset = {...event.target.dataset, menuKey: menu.props.menuKey};
+        }
+
         this.selectFirstLinkChild(menu, event);
       },
       onBackHandler: () => {
@@ -155,7 +158,7 @@ class SideMenuDrill extends WixComponent {
     const menuB = menuBId && menus[menuBId];
 
     return (
-      <SideMenu>
+      <SideMenu dataHook="drill-view">
         <div className={styles.drillViewContainer}>
           <SlideAnimation direction={this.state.slideDirection} animateAppear={false}>
             { showMenuA ? this.renderMenu(menuA) : null }

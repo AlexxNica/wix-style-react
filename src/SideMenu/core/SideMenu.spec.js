@@ -80,7 +80,7 @@ describe('SideMenu', () => {
     const driver = createComponent(menu);
     driver.clickBackLink();
 
-    expect(spy.mock.calls.length).toBe(1);
+    expect(spy).toHaveBeenCalled();
   });
 
   it('should allow to select a menu navigation link', () => {
@@ -96,6 +96,6 @@ describe('SideMenu', () => {
     const driver = createComponent(menu);
     driver.clickLinkByIndex(1);
 
-    expect(spy.mock.calls.length).toBe(1);
+    expect(spy).toHaveBeenCalled();
   });
 });

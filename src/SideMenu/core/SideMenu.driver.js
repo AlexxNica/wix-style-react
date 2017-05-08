@@ -1,4 +1,5 @@
 import ReactTestUtils from 'react-addons-test-utils';
+import navigationStyles from './navigation/styles.scss';
 
 const sideMenuDriverFactory = ({element}) => {
   const getHeader = () => element.querySelector('[data-hook=menu-header]');
@@ -19,8 +20,10 @@ const sideMenuDriverFactory = ({element}) => {
     hasBackLink: () => !!getNavigationBackLink(),
     headerContent: () => getHeader().textContent,
     navigationLinks: () => getNavigationLinks(),
+    isNavigationLinkActive: index => getNavigationLinks()[index].classList.contains(navigationStyles.linkActive),
     navigationSeparators: () => getNavigationSeparators(),
     navigationCategories: () => getNavigationCategories(),
+    navigationCategoryContent: index => getNavigationCategories()[index].textContent,
     clickLinkByIndex: index => ReactTestUtils.Simulate.click(getNavigationLinks()[index]),
     clickBackLink: () => ReactTestUtils.Simulate.click(getNavigationBackLink()),
     promotionContent: () => getPromotion().textContent,
