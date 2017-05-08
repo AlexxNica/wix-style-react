@@ -79,8 +79,8 @@ class SideMenuDrill extends WixComponent {
     const defaultSubMenProps = {
       isOpen: false,
       onSelectHandler: event => {
-        if (event && event.target) {
-          event.target.dataset = {...event.target.dataset, menuKey: menu.props.menuKey};
+        if (event && event.target && event.target.dataset) {
+          event.target.dataset.menuKey = menu.props.menuKey;
         }
 
         this.selectFirstLinkChild(menu, event);

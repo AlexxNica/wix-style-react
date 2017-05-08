@@ -20,7 +20,7 @@ const sideMenuDriverFactory = ({element}) => {
     hasBackLink: () => !!getNavigationBackLink(),
     headerContent: () => getHeader().textContent,
     navigationLinks: () => getNavigationLinks(),
-    isNavigationLinkActive: index => getNavigationLinks()[index].classList.contains(navigationStyles.linkActive),
+    isLinkActiveByIndex: index => getNavigationLinks()[index].classList.contains(navigationStyles.linkActive),
     navigationSeparators: () => getNavigationSeparators(),
     navigationCategories: () => getNavigationCategories(),
     navigationCategoryContent: index => getNavigationCategories()[index].textContent,

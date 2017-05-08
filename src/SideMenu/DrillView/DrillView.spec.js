@@ -28,7 +28,7 @@ describe('DrillView', () => {
   function createSubMenu(key, level, maxLevel, activeLink) {
     const menuKey = `${key}_${level}`;
     return (
-      <SideMenuDrill.SubMenu menuKey={menuKey} title={menuKey}>
+      <SideMenuDrill.SubMenu key={menuKey} menuKey={menuKey} title={menuKey}>
         <SideMenu.Header>
           {getHeader(level)}
         </SideMenu.Header>
@@ -83,7 +83,7 @@ describe('DrillView', () => {
 
     expect(driver.getMenuDriver().headerContent()).toBe(getHeader(0));
     expect(driver.getMenuDriver().footerContent()).toBe(getFooter(0));
-    expect(driver.getMenuDriver().isNavigationLinkActive(activeIndex)).toBe(true);
+    expect(driver.getMenuDriver().isLinkActiveByIndex(activeIndex)).toBe(true);
   });
 
   it('should initially render the sub menu of the active link', () => {
@@ -94,7 +94,7 @@ describe('DrillView', () => {
     expect(driver.getMenuDriver().headerContent()).toBe(getHeader(1));
     expect(driver.getMenuDriver().footerContent()).toBe(getFooter(1));
     expect(driver.getMenuDriver().hasBackLink()).toBe(true);
-    expect(driver.getMenuDriver().isNavigationLinkActive(activeIndex)).toBe(true);
+    expect(driver.getMenuDriver().isLinkActiveByIndex(activeIndex)).toBe(true);
   });
 
   it('should initially render the sub menu of the active link', () => {
@@ -105,7 +105,7 @@ describe('DrillView', () => {
     expect(driver.getMenuDriver().headerContent()).toBe(getHeader(1));
     expect(driver.getMenuDriver().footerContent()).toBe(getFooter(1));
     expect(driver.getMenuDriver().hasBackLink()).toBe(true);
-    expect(driver.getMenuDriver().isNavigationLinkActive(activeIndex)).toBe(true);
+    expect(driver.getMenuDriver().isLinkActiveByIndex(activeIndex)).toBe(true);
     expect(driver.getMenuDriver().navigationCategoryContent(0)).toBe('SubMenu1_1');
   });
 
@@ -128,7 +128,7 @@ describe('DrillView', () => {
 
     expect(driver.getMenuDriver().headerContent()).toBe(getHeader(1));
     expect(driver.getMenuDriver().footerContent()).toBe(getFooter(1));
-    expect(driver.getMenuDriver().isNavigationLinkActive(activeIndex)).toBe(true);
+    expect(driver.getMenuDriver().isLinkActiveByIndex(activeIndex)).toBe(true);
     expect(driver.getMenuDriver().hasBackLink()).toBe(true);
 
     driver.getMenuDriver().clickBackLink();
@@ -136,7 +136,7 @@ describe('DrillView', () => {
     setTimeout(() => {
       expect(driver.getMenuDriver().headerContent()).toBe(getHeader(0));
       expect(driver.getMenuDriver().footerContent()).toBe(getFooter(0));
-      expect(driver.getMenuDriver().isNavigationLinkActive(3)).toBe(true);
+      expect(driver.getMenuDriver().isLinkActiveByIndex(3)).toBe(true);
       done();
     }, 600);
   });
