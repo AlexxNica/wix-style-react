@@ -76,11 +76,11 @@ class Col extends Component {
     className: PropTypes.string,
     span: PropTypes.number,
     rtl: PropTypes.bool,
-    xs: PropTypes.number,
-    sm: PropTypes.number,
-    md: PropTypes.number,
-    lg: PropTypes.number,
-    xl: PropTypes.number,
+    xs: PropTypes.string,
+    sm: PropTypes.string,
+    md: PropTypes.string,
+    lg: PropTypes.string,
+    xl: PropTypes.string,
   };
 
   isVisibleHidden(str) {
