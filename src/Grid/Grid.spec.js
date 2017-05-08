@@ -125,6 +125,4 @@ describe('Grid', () => {
       expect(element.find('[data-hook="test"]').length).toEqual(1);
     });
   });
-})
-
-
+});
