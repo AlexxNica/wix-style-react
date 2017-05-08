@@ -1,7 +1,7 @@
 @import '../../../common.scss';
 
 $padding-horizontal: 30px;
-$padding-vertical: 16px;
+$padding-vertical: 11px;
 
 .navigation {
   margin-bottom: auto;
@@ -22,12 +22,13 @@ $padding-vertical: 16px;
 
 .link {
   @extend .link-base;
-  font-family: $FontRoman;
+  font-family: $FontLight;
 
   &:hover:not(.linkActive),
   &:focus:not(.linkActive) {
-    background: #325770;
-    color: #fff;
+    background: #33566f;
+    color: #9fd8fc;
+    transition: 0.3s;
   }
 
   &.linkDiminishedHover:hover {
@@ -41,7 +42,11 @@ $padding-vertical: 16px;
   &:focus { text-decoration: none; }
 }
 
-.linkActive { background: #2a4f68; }
+.linkActive {
+  color: #9fd8fc;
+  background: #2A4F68;
+  transition: 0.3s;
+}
 
 .separator {
   width: 81%;
