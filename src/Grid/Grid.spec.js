@@ -46,7 +46,6 @@ describe('Grid', () => {
   describe('breakpoints hide options', () => {
     it('should add hidden xs class when using hiddenxs attribute ', () => {
       const element = mount(<Col xs="hidden"/>);
-      console.log(element.html());
       expect(element.hasClass('hiddenXs')).toEqual(true);
     });
 
@@ -113,7 +112,19 @@ describe('Grid', () => {
       expect(element.hasClass('test1')).toEqual(true);
       expect(element.hasClass('test2')).toEqual(true);
     });
-
   });
-});
+
+  describe('support dataHook', () => {
+    it('for Row', () => {
+      const element = mount(<Col dataHook="test"/>);
+      expect(element.find('[data-hook="test"]').length).toEqual(1);
+    });
+
+    it('for Col', () => {
+      const element = mount(<Row dataHook="test"/>);
+      expect(element.find('[data-hook="test"]').length).toEqual(1);
+    });
+  });
+})
+
 

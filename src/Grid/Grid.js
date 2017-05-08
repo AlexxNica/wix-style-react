@@ -25,7 +25,8 @@ class Row extends Component {
     children: PropTypes.node,
     className: PropTypes.string,
     rtl: PropTypes.bool,
-    stretchViewsVertically: PropTypes.bool
+    stretchViewsVertically: PropTypes.bool,
+    dataHook: PropTypes.string
   };
 
   static defaultProps = {
@@ -42,7 +43,7 @@ class Row extends Component {
       });
 
     return (
-      <div className={rowClasses}>
+      <div className={rowClasses} data-hook={this.props.dataHook}>
         {this.props.children}
       </div>
     );
@@ -81,6 +82,7 @@ class Col extends Component {
     md: PropTypes.string,
     lg: PropTypes.string,
     xl: PropTypes.string,
+    dataHook: PropTypes.string
   };
 
   isVisibleHidden(str) {
@@ -115,9 +117,8 @@ class Col extends Component {
       {[styles[`${this.props.md}Md`]]: this.isVisibleHidden(this.props.md)},
       {[styles[`${this.props.lg}Lg`]]: this.isVisibleHidden(this.props.lg)},
     );
-
     return (
-      <div className={columnClasses}>
+      <div className={columnClasses} data-hook={this.props.dataHook}>
         {this.props.children}
       </div>
     );
