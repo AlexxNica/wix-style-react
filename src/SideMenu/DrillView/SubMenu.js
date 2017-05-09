@@ -6,7 +6,7 @@ import SideMenuDrill from './index';
 const SubMenu = ({children, title, isOpen, isActive, onSelectHandler, onBackHandler, backLabel}) => {
   if (!isOpen) {
     return (
-      <SideMenu.NavigationLink isActive={isActive} onClick={onSelectHandler}>
+      <SideMenu.NavigationLink isActive={isActive} onClick={onSelectHandler} withArrow>
         {title}
       </SideMenu.NavigationLink>
     );

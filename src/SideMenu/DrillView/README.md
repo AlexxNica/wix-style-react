@@ -1,8 +1,7 @@
 # SideMenu DrillView
 
-A menu drill view component showing a single menu at a time with a slide animation to/from sub menus.
+An N-Level menu drill view component showing a single menu at a time with a slide animation to/from sub menus.
 The menus are rendered using the SideMenu design.
-
 
 ## Usage
 
@@ -37,6 +36,14 @@ The menus are rendered using the SideMenu design.
 </SideMenuDrill>
 ```
 
+The DrillView renders the menu of the `Link` marked with `isActive`, otherwise it will render the root menu.
+In order to change the displayed menu you need to change the `isActive` flag of the new active `Link` and the DrillView menu will update accordingly.
+Make sure that you only have a single `Link` marked with `isActive` at all times, otherwise the behaviour is unexpected.
+
+You can render as many `SubMenu`s as you wish! Each `SubMenu` can have a `SideMenu.Header`, `SideMenu.Promotion`, `SideMenu.Footer` or any other custom item.
+Make sure you wrap the internal `Link`s and `SubMenu`s with a `Navigation` component! 
+
+
 ## Props
 
 | propName          | propType | defaultValue | isRequired | description                                                                        |
@@ -48,7 +55,7 @@ The menus are rendered using the SideMenu design.
 
 ### Link `<SideMenuDrill.Link/>`
 
-Main navigation item
+Main navigation item. Make sure you have zero or one Link active at all times.
 
 | propName          | propType | defaultValue | isRequired | description                                                                        |
 | -                 | -        | -            | -          | -                                                                                  |

@@ -36,6 +36,7 @@ Main navigation item
 | propName          | propType | defaultValue | isRequired | description                                                                        |
 | -                 | -        | -            | -          | -                                                                                  |
 | isActive          | bool     | false        | -          | slightly different styling to indicate active link                                 |
+| withArrow         | bool     | false        | -          | displays an arrow on hover                                                         |
 | isDiminishedHover | bool     | false        | -          | slightly different styling for hover (e.g. no background transition)               |
 | children          | node     | -            | -          | -                                                                                  |
 | ...rest           | *        | -            | -          | any other prop will be added to root element (e.g. `onClick`, `onMouseEnter` etc.) |
