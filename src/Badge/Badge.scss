@@ -1,0 +1,22 @@
+.badge {
+  display: inline-block;
+  padding: 0 1em;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 1em;
+  line-height: 2em;
+  font-weight: bold;
+}
+
+.default { background: #636c72; }
+.primary { background: #0275d8; }
+.success { background: #5cb85c; }
+.info    { background: #5bc0de; }
+.warning { background: #f0ad4e; }
+.danger  { background: #d9534f; }
+
+.top    { vertical-align: top;    }
+.middle { vertical-align: middle; }
+.bottom { vertical-align: bottom; }
