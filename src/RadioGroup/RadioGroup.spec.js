@@ -18,10 +18,16 @@ describe('RadioGroup', () => {
     </RadioGroup>
   );
 
+  it('should have the correct radio buttons', () => {
+    const driver = createDriver(elementToRender());
+    expect(driver.getNumberOfRadios()).toBe(4);
+    expect(driver.getRadioValueAt(0)).toBe('1');
+  });
+
   it('should check the option that matches the initial value', () => {
     const value = 2;
     const driver = createDriver(elementToRender({value}));
-    expect(driver.getSelectedValue()).toBe(value);
+    expect(driver.getSelectedValue()).toBe(value.toString());
   });
 
   it('should not check any options if value was not matched', () => {

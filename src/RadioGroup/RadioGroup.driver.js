@@ -15,11 +15,13 @@ const radioGroupDriverFactory = ({element, wrapper, component}) => {
     exists: () => !!element,
     selectByValue: value => ReactTestUtils.Simulate.change(getRadioByValue(value)),
     selectByIndex: index => ReactTestUtils.Simulate.change(radioButtons[index]),
-    getSelectedValue: () => selectedRadio ? Number(selectedRadio.childNodes[0].value) : null,
+    getRadioValueAt: index => radioButtons[index].value,
+    getSelectedValue: () => selectedRadio ? selectedRadio.childNodes[0].value : null,
     getClassOfLabelAt: index => labels[index].className,
     isVerticalDisplay: () => isClassExists(element, 'vertical'),
     isHorizontalDisplay: () => isClassExists(element, 'horizontal'),
     spacing: () => radios[0].style._values['margin-bottom'],
+    getNumberOfRadios: () => radios.length,
     setProps: props => {
       const ClonedWithProps = React.cloneElement(component, Object.assign({}, component.props, props), ...(component.props.children || []));
       ReactDOM.render(<div ref={r => element = r}>{ClonedWithProps}</div>, wrapper);

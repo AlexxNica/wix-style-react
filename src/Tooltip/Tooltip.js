@@ -98,7 +98,8 @@ class Tooltip extends WixComponent {
   _unmounted = false;
 
   state = {
-    visible: false
+    visible: false,
+    hidden: true
   };
 
   componentDidUpdate() {
@@ -196,6 +197,7 @@ class Tooltip extends WixComponent {
     if (this._unmounted) {
       return;
     }
+    this.setState({hidden: false});
     if (this._hideTimeout) {
       clearTimeout(this._hideTimeout);
       this._hideTimeout = null;
@@ -203,56 +205,63 @@ class Tooltip extends WixComponent {
     if (this._showTimeout) {
       return;
     }
-    this._showTimeout = setTimeout(() => {
-      if (this.props.onShow) {
-        this.props.onShow();
-      }
-
-      this.setState({visible: true}, () => {
-        if (!this._mountNode) {
-          this._mountNode = document.createElement('div');
-          this._getContainer() && this._getContainer().appendChild(this._mountNode);
+    if (!this.state.visible) {
+      this._showTimeout = setTimeout(() => {
+        if (this.props.onShow) {
+          this.props.onShow();
         }
-        this._showTimeout = null;
 
-        let fw = 0;
-        let sw = 0;
-        do {
-          this.componentDidUpdate();
-          const tooltipNode = ReactDOM.findDOMNode(this.tooltipContent);
-          fw = this._getRect(tooltipNode).width;
-          this._updatePosition(this.tooltipContent);
-          sw = this._getRect(tooltipNode).width;
-        } while (!this.props.appendToParent && fw !== sw);
-      });
-    }, this.props.showDelay);
+        this.setState({visible: true}, () => {
+          if (!this._mountNode) {
+            this._mountNode = document.createElement('div');
+            this._getContainer() && this._getContainer().appendChild(this._mountNode);
+          }
+          this._showTimeout = null;
+
+          let fw = 0;
+          let sw = 0;
+          do {
+            this.componentDidUpdate();
+            const tooltipNode = ReactDOM.findDOMNode(this.tooltipContent);
+            fw = this._getRect(tooltipNode).width;
+            this._updatePosition(this.tooltipContent);
+            sw = this._getRect(tooltipNode).width;
+          } while (!this.props.appendToParent && fw !== sw);
+        });
+      }, this.props.showDelay);
+    }
   }
 
   hide() {
+    this.setState({hidden: true});
     if (this._showTimeout) {
       clearTimeout(this._showTimeout);
       this._showTimeout = null;
     }
+
     if (this._hideTimeout) {
       return;
     }
-    this._hideTimeout = setTimeout(() => {
-      if (this._mountNode) {
-        ReactDOM.unmountComponentAtNode(this._mountNode);
-        this._getContainer() && this._getContainer().removeChild(this._mountNode);
-        this._mountNode = null;
-      }
-      this._hideTimeout = null;
-      if (!this._unmounted) {
-        this.setState({visible: false});
-      }
-    }, this._unmounted ? 0 : this.props.hideDelay);
+
+    if (this.state.visible) {
+      this._hideTimeout = setTimeout(() => {
+        if (this._mountNode) {
+          ReactDOM.unmountComponentAtNode(this._mountNode);
+          this._getContainer() && this._getContainer().removeChild(this._mountNode);
+          this._mountNode = null;
+        }
+        this._hideTimeout = null;
+        if (!this._unmounted) {
+          this.setState({visible: false});
+        }
+      }, this._unmounted ? 0 : this.props.hideDelay);
+    }
   }
 
   _hideOrShow(event) {
-    if (this.props.hideTrigger === event && this.state.visible) {
+    if (this.props.hideTrigger === event && !this.state.hidden) {
       this.hide();
-    } else if (this.props.showTrigger === event && !this.state.visible) {
+    } else if (this.props.showTrigger === event) {
       this.show();
     }
   }
