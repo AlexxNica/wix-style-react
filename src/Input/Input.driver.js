@@ -22,6 +22,7 @@ const inputDriverFactory = ({element, wrapper, component}) => {
     getAriaLabel: () => input.getAttribute('aria-label'),
     getAriaControls: () => input.getAttribute('aria-controls'),
     getType: () => input.type,
+    getProp: propName => input.getAttribute(propName),
     hasPrefix: () => element.querySelectorAll(`.${styles.prefix}`).length === 1,
     hasPrefixClass: () => element.querySelectorAll(`.${styles.input}.${styles.withPrefix}`).length === 1,
     hasSuffix: () => element.querySelectorAll(`.${styles.suffix}`).length === 1,
