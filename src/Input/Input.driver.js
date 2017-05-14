@@ -20,6 +20,7 @@ const inputDriverFactory = ({element, wrapper, component}) => {
     getReadOnly: () => input.readOnly,
     getTextOverflow: () => input.style['text-overflow'],
     getType: () => input.type,
+    getProp: propName => input.getAttribute(propName),
     hasPrefix: () => element.querySelectorAll(`.${styles.prefix}`).length === 1,
     hasPrefixClass: () => element.querySelectorAll(`.${styles.input}.${styles.withPrefix}`).length === 1,
     hasSuffix: () => element.querySelectorAll(`.${styles.suffix}`).length === 1,

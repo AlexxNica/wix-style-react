@@ -46,6 +46,7 @@ class Input extends Component {
       theme,
       disabled,
       error,
+      ariaLabel
     } = this.props;
 
     const onIconClicked = () => {
@@ -88,7 +89,7 @@ class Input extends Component {
         onKeyUp={onKeyUp}
         readOnly={readOnly}
         type={type}
-
+        {...(ariaLabel && {'aria-label': ariaLabel})}
         {...props}
         />
     );
@@ -220,7 +221,8 @@ Input.propTypes = {
   help: PropTypes.bool,
   textOverflow: PropTypes.string,
   helpMessage: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  ariaLabel: PropTypes.string,
 };
 
 export default Input;

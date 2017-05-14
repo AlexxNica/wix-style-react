@@ -371,6 +371,19 @@ describe('Input', () => {
       expect(driver.hasSuffixesClass()).toBeTruthy();
     });
   });
+
+  describe('aria-label', () => {
+    it('shound not have any aria lable buy default', () => {
+      const driver = createDriver(<Input ariaLabel="hello"/>);
+      expect(driver.getProp('aria-label')).toBe('hello');
+    });
+
+    it('should allow adding a custom aria-label', () => {
+      const driver = createDriver(<Input/>);
+      expect(driver.getProp('aria-label')).toBeNull;
+    });
+  });
+
 });
 
 describe('testkit', () => {
