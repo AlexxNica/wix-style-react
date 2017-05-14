@@ -372,16 +372,27 @@ describe('Input', () => {
     });
   });
 
-  describe('aria-label', () => {
-    it('shound not have any aria lable buy default', () => {
+  describe('aria attributes', () => {
+    it('should allow adding a custom aria-label', () => {
       const driver = createDriver(<Input ariaLabel="hello"/>);
       expect(driver.getProp('aria-label')).toBe('hello');
     });
 
-    it('should allow adding a custom aria-label', () => {
+    it('should not have any aria label buy default', () => {
       const driver = createDriver(<Input/>);
       expect(driver.getProp('aria-label')).toBeNull;
     });
+
+    it('should allow adding aria-controls', () => {
+      const driver = createDriver(<Input ariaControls="id"/>);
+      expect(driver.getProp('aria-controls')).toBe('id');
+    });
+
+    it('should not have any aria controls buy default', () => {
+      const driver = createDriver(<Input/>);
+      expect(driver.getProp('aria-controls')).toBeNull;
+    });
+
   });
 
 });

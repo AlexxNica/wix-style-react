@@ -46,7 +46,8 @@ class Input extends Component {
       theme,
       disabled,
       error,
-      ariaLabel
+      ariaLabel,
+      ariaControls
     } = this.props;
 
     const onIconClicked = () => {
@@ -90,6 +91,7 @@ class Input extends Component {
         readOnly={readOnly}
         type={type}
         {...(ariaLabel && {'aria-label': ariaLabel})}
+        {...(ariaControls && {'aria-controls': ariaControls})}
         {...props}
         />
     );
@@ -223,6 +225,7 @@ Input.propTypes = {
   helpMessage: PropTypes.string,
   title: PropTypes.string,
   ariaLabel: PropTypes.string,
+  ariaControls: PropTypes.string,
 };
 
 export default Input;
