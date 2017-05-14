@@ -29,6 +29,7 @@ export {default as TimeInput} from './TimeInput';
 export {default as Tooltip} from './Tooltip';
 export {default as SideBar} from './SideBar';
 export {default as SideMenu} from './SideMenu';
+export {default as SideMenuDrill} from './SideMenu/DrillView';
 export {default as DropdownLayout} from './DropdownLayout';
 export {default as Dropdown} from './Dropdown';
 export {default as Autocomplete} from './AutoComplete';
@@ -44,3 +45,6 @@ export {default as Breadcrumbs} from './Breadcrumbs';
 export {default as ImageViewer} from './ImageViewer';
 export {default as PopoverMenu} from './PopoverMenu';
 export {default as PopoverMenuItem} from './PopoverMenuItem';
+export {default as Icons} from './Icons';
+export {default as Badge} from './Badge';
+
