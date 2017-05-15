@@ -94,8 +94,7 @@ class Input extends Component {
         type={type}
         {...ariaAttribute}
         {...props}
-      />
-    );
+        />);
 
     return (<div className={styles.inputWrapper}>
       {prefix && <div className={styles.prefix}>{prefix}</div>}
@@ -116,7 +115,7 @@ class Input extends Component {
         unit={unit}
         focused={this.state.focus}
         suffix={suffix}
-      /> }
+        /> }
     </div>);
   }
 
