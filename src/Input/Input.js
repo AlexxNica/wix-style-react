@@ -46,6 +46,7 @@ class Input extends Component {
       theme,
       disabled,
       error,
+      width
     } = this.props;
 
     const onIconClicked = () => {
@@ -68,7 +69,7 @@ class Input extends Component {
 
     const inputElement = (
       <input
-        style={{textOverflow}}
+        style={{textOverflow, width}}
         ref={input => this.input = input}
         className={inputClassNames}
         id={id}
@@ -177,7 +178,8 @@ Input.defaultProps = {
   helpMessage: '',
   roundInput: false,
   textOverflow: 'clip',
-  maxLength: 524288
+  maxLength: 524288,
+  width: 'initial'
 };
 
 Input.propTypes = {
@@ -220,7 +222,8 @@ Input.propTypes = {
   help: PropTypes.bool,
   textOverflow: PropTypes.string,
   helpMessage: PropTypes.string,
-  title: PropTypes.string
+  title: PropTypes.string,
+  width: PropTypes.string
 };
 
 export default Input;

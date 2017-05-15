@@ -11,6 +11,8 @@ class InputWithTags extends React.Component {
     this.focus = this.focus.bind(this);
     this.blur = this.blur.bind(this);
     this.select = this.select.bind(this);
+
+    this.state = {inputValue: ''};
   }
 
   componentDidMount() {
@@ -31,10 +33,18 @@ class InputWithTags extends React.Component {
 
         {tags.map(({label, ...rest}) => <Tag key={rest.id} onRemove={onRemoveTag} {...rest}>{label}</Tag>)}
         <span className={styles.input} data-hook="inner-input-with-tags">
+          <div className={styles.hiddenDiv}>
+            {this.state.inputValue}
+          </div>
           <Input
             ref={input => this.input = input}
             placeholder={tags.length === 0 ? placeholder : ''}
             {...desiredProps}
+            width='100px'
+            onChange={e => {
+              this.setState({inputValue: e.target.value});
+              desiredProps.onChange && desiredProps.onChange(e);
+            }}
             />
         </span>
       </div>
