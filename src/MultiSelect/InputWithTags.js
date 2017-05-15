@@ -28,12 +28,13 @@ class InputWithTags extends React.Component {
     });
 
     const desiredProps = omit(inputProps, ['onManuallyInput', 'inputElement', 'closeOnSelect', 'predicate', 'menuArrow', 'onClickOutside', 'fixedHeader', 'fixedFooter', 'dataHook']);
+    const fontSize = (desiredProps.size && desiredProps.size === 'small') ? '14px' : '16px';
     return (
       <div className={className} onClick={() => this.input.focus()}>
 
         {tags.map(({label, ...rest}) => <Tag key={rest.id} onRemove={onRemoveTag} {...rest}>{label}</Tag>)}
         <span className={styles.input} data-hook="inner-input-with-tags">
-          <div className={styles.hiddenDiv}>
+          <div className={styles.hiddenDiv} style={{fontSize}}>
             {this.state.inputValue}
           </div>
           <Input
