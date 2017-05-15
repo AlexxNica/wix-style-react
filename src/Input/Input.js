@@ -46,7 +46,9 @@ class Input extends Component {
       theme,
       disabled,
       error,
-      width
+      width,
+      ariaLabel,
+      ariaControls
     } = this.props;
 
     const onIconClicked = () => {
@@ -66,6 +68,8 @@ class Input extends Component {
       [styles.withSuffix]: visibleSuffixCount,
       [styles.withSuffixes]: visibleSuffixCount > 1
     });
+
+    const ariaAttribute = Object.assign({}, (ariaLabel && {'aria-label': ariaLabel}), (ariaControls && {'aria-controls': ariaControls}));
 
     const inputElement = (
       <input
@@ -89,10 +93,9 @@ class Input extends Component {
         onKeyUp={onKeyUp}
         readOnly={readOnly}
         type={type}
-
+        {...ariaAttribute}
         {...props}
-        />
-    );
+        />);
 
     return (<div className={styles.inputWrapper}>
       {prefix && <div className={styles.prefix}>{prefix}</div>}
@@ -223,7 +226,9 @@ Input.propTypes = {
   textOverflow: PropTypes.string,
   helpMessage: PropTypes.string,
   title: PropTypes.string,
-  width: PropTypes.string
+  width: PropTypes.string,
+  ariaLabel: PropTypes.string,
+  ariaControls: PropTypes.string
 };
 
 export default Input;
