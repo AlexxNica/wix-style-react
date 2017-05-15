@@ -68,6 +68,8 @@ class Input extends Component {
       [styles.withSuffixes]: visibleSuffixCount > 1
     });
 
+    const ariaAttribute = Object.assign({}, (ariaLabel && {'aria-label': ariaLabel}), (ariaControls && {'aria-controls': ariaControls}));
+
     const inputElement = (
       <input
         style={{textOverflow}}
@@ -90,10 +92,9 @@ class Input extends Component {
         onKeyUp={onKeyUp}
         readOnly={readOnly}
         type={type}
-        {...(ariaLabel && {'aria-label': ariaLabel})}
-        {...(ariaControls && {'aria-controls': ariaControls})}
+        {...ariaAttribute}
         {...props}
-        />
+      />
     );
 
     return (<div className={styles.inputWrapper}>
@@ -115,7 +116,7 @@ class Input extends Component {
         unit={unit}
         focused={this.state.focus}
         suffix={suffix}
-        /> }
+      /> }
     </div>);
   }
 
