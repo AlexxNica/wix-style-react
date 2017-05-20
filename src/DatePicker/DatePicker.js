@@ -13,7 +13,8 @@ export default class DatePicker extends Component {
     excludePastDates: React.PropTypes.bool,
     readOnly: React.PropTypes.bool,
     showYearDropdown: React.PropTypes.bool,
-    rtl: React.PropTypes.bool
+    rtl: React.PropTypes.bool,
+    theme: React.PropTypes.oneOf(['normal', 'paneltitle', 'material', 'amaterial']),
   };
 
   static defaultProps = {
@@ -41,7 +42,7 @@ export default class DatePicker extends Component {
 
   renderInput() {
     return (
-      <DatePickerInput rtl={this.props.rtl} style={this.props.style}/>
+      <DatePickerInput rtl={this.props.rtl} style={this.props.style} theme={this.props.theme}/>
     );
   }
 

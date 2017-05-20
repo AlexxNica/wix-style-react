@@ -20,7 +20,7 @@ __Note__: This component has multiple issues and will most likely change in the 
 | readOnly | bool | false | - | Is the input field readOnly |
 | showYearDropdown | bool | false | - | Display a selectable yearDropdown |
 | rtl | bool | false | - | RTL mode |
-
+| theme | string | normal | - | Theme of the Input |
 
 ## Keyboard support
 
