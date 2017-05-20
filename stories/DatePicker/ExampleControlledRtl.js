@@ -17,8 +17,8 @@ class ControlledDatePicker extends React.Component {
         value={this.state.value}
         onChange={value => this.setState({value})}
         dateFormat="DD/MM/YYYY"
-        rtl={true}
-      />
+        rtl
+        />
     );
   }
 }

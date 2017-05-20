@@ -22,7 +22,7 @@ storiesOf('Core', module)
       </CodeExample>
 
       <CodeExample title="Controlled input - RTL" code={ExampleControlledRawRtl}>
-          <ExampleControlledRtl/>
+        <ExampleControlledRtl/>
       </CodeExample>
 
       <CodeExample title="Controlled input - exclude past dates" code={ExampleControlledRawExcludePast}>

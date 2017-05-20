@@ -15,6 +15,7 @@ export default class DatePicker extends Component {
     showYearDropdown: React.PropTypes.bool,
     rtl: React.PropTypes.bool,
     theme: React.PropTypes.oneOf(['normal', 'paneltitle', 'material', 'amaterial']),
+    placeholder: React.PropTypes.string
   };
 
   static defaultProps = {
@@ -42,7 +43,12 @@ export default class DatePicker extends Component {
 
   renderInput() {
     return (
-      <DatePickerInput rtl={this.props.rtl} style={this.props.style} theme={this.props.theme}/>
+      <DatePickerInput
+        rtl={this.props.rtl}
+        style={this.props.style}
+        theme={this.props.theme}
+        placeHolder={this.props.placeholder}
+        />
     );
   }
 

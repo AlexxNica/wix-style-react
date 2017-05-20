@@ -21,6 +21,7 @@ __Note__: This component has multiple issues and will most likely change in the 
 | showYearDropdown | bool | false | - | Display a selectable yearDropdown |
 | rtl | bool | false | - | RTL mode |
 | theme | string | normal | - | Theme of the Input |
+| placeholder | string | '' | - | placeholder of the Input |
 
 ## Keyboard support
 
