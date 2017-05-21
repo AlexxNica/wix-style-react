@@ -11,10 +11,7 @@ export default class DatePicker extends Component {
     style: React.PropTypes.object,
     value: React.PropTypes.object,
     onChange: React.PropTypes.func.isRequired,
-    filterDate: React.PropTypes.func,
-    excludePastDates: React.PropTypes.bool,
     readOnly: React.PropTypes.bool,
-    showYearDropdown: React.PropTypes.bool,
     rtl: React.PropTypes.bool,
     theme: React.PropTypes.oneOf(['normal', 'paneltitle', 'material', 'amaterial']),
     prefix: React.PropTypes.node
