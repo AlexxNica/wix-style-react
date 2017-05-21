@@ -21,7 +21,9 @@ __Note__: This component has multiple issues and will most likely change in the 
 | showYearDropdown | bool | false | - | Display a selectable yearDropdown |
 | rtl | bool | false | - | RTL mode |
 | theme | string | normal | - | Theme of the Input |
-| placeholder | string | '' | - | placeholder of the Input |
+| placeholderText | string | '' | - | placeholder of the Input |
+
+* See [here](https://github.com/Hacker0x01/react-datepicker/blob/master/docs/datepicker.md) the full props list of React DatePicker. 
 
 ## Keyboard support
 

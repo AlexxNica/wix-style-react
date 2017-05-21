@@ -3,9 +3,11 @@ import ReactDatepicker from 'react-datepicker';
 import DatePickerInput from './DatePickerInput';
 import moment from 'moment';
 import css from './DatePicker.scss';
+import omit from 'lodash.omit';
 
 export default class DatePicker extends Component {
   static propTypes = {
+    ...ReactDatepicker.propTypes,
     style: React.PropTypes.object,
     value: React.PropTypes.object,
     onChange: React.PropTypes.func.isRequired,
@@ -15,7 +17,7 @@ export default class DatePicker extends Component {
     showYearDropdown: React.PropTypes.bool,
     rtl: React.PropTypes.bool,
     theme: React.PropTypes.oneOf(['normal', 'paneltitle', 'material', 'amaterial']),
-    placeholder: React.PropTypes.string
+    prefix: React.PropTypes.node
   };
 
   static defaultProps = {
@@ -41,18 +43,14 @@ export default class DatePicker extends Component {
     return this.props.filterDate(date);
   }
 
-  renderInput() {
-    return (
-      <DatePickerInput
-        rtl={this.props.rtl}
-        style={this.props.style}
-        theme={this.props.theme}
-        placeHolder={this.props.placeholder}
-        />
-    );
+  renderInput(inputProps) {
+    return <DatePickerInput {...inputProps}/>;
   }
 
   render() {
+    const unWantedProps = ['dateFormat', 'excludePastDates', 'filterDate', 'showYearDropdown'];
+    const inputProps = omit(this.props, unWantedProps);
+
     return (
       <div className={css.wrapper}>
         <ReactDatepicker
@@ -63,7 +61,7 @@ export default class DatePicker extends Component {
               this.props.onChange(val);
             }
           }}
-          customInput={this.renderInput()}
+          customInput={this.renderInput(inputProps)}
           filterDate={this.filterDate}
           readOnly={this.props.readOnly}
           showYearDropdown={this.props.showYearDropdown}
