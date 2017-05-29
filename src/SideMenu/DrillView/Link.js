@@ -1,5 +1,5 @@
 import React from 'react';
-import {node, bool, string} from 'prop-types';
+import {node, bool} from 'prop-types';
 import SideMenu from '../index';
 
 const Link = ({children, isActive, ...rest}) => (

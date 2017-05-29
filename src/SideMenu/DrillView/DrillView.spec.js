@@ -21,9 +21,11 @@ describe('DrillView', () => {
     const isLevelActive = activeLevel === level;
 
     return [...new Array(linksPerLevel)].map((_, i) => {
-      return <SideMenuDrill.Link key={`${level}_${i}`} isActive={isLevelActive && activeIndex === i}>
-        <a href="//wix.com" onClick={onClickSpy}>Link {i}</a>
-      </SideMenuDrill.Link>;
+      return (
+        <SideMenuDrill.Link key={`${level}_${i}`} isActive={isLevelActive && activeIndex === i}>
+          <a href="//wix.com" onClick={onClickSpy}>Link {i}</a>
+        </SideMenuDrill.Link>
+      );
     });
   }
 

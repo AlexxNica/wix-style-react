@@ -13,7 +13,7 @@ const LinkLayout = ({children, isDiminishedHover, isActive, withArrow, ...rest})
     })}
     data-hook="menu-navigation-link-wrapper"
     {...rest}
-  >
+    >
     {children}
     {withArrow && <span className={styles.linkArrow}><DataPickerArrow/></span>}
   </span>;
