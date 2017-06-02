@@ -405,6 +405,14 @@ describe('Input', () => {
 
   });
 
+  describe('tooltipPlacement attribute', () => {
+    //for now it is relevant only for amaterial theme
+    it.only('should have ', () => {
+      const driver = createDriver(<Input theme="amaterial" help helpMessage="help!!"/>);
+      console.log(driver.element().querySelector('[data-hook="input-tooltip"][placement="right"]'));
+    });
+  });
+
 });
 
 describe('testkit', () => {

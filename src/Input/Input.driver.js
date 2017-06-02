@@ -8,6 +8,7 @@ const inputDriverFactory = ({element, wrapper, component}) => {
   const clearButton = element && element.querySelector(`.${styles.clearButton}`);
 
   return {
+    element: () => element,
     trigger: (trigger, event) => ReactTestUtils.Simulate[trigger](input, event),
     focus: () => input.focus(),
     blur: () => ReactTestUtils.Simulate.blur(input),
