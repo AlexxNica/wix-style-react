@@ -21,7 +21,8 @@ export default class DatePicker extends Component {
     inputDataHook: PropTypes.string,
     onEnterPressed: PropTypes.func,
     error: PropTypes.bool,
-    errorMessage: PropTypes.string
+    errorMessage: PropTypes.string,
+    customInput: PropTypes.node
   };
 
   static defaultProps = {
@@ -69,7 +70,7 @@ export default class DatePicker extends Component {
               this.props.onChange(val);
             }
           }}
-          customInput={this.renderInput()}
+          customInput={this.props.customInput || this.renderInput()}
           filterDate={this.filterDate}
           readOnly={this.props.readOnly}
           showYearDropdown={this.props.showYearDropdown}
