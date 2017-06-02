@@ -19,11 +19,7 @@ __Note__: This component has multiple issues and will most likely change in the 
 | excludePastDates | bool | false | - | Past dates are unselectable |
 | readOnly | bool | false | - | Is the input field readOnly |
 | showYearDropdown | bool | false | - | Display a selectable yearDropdown |
-| rtl | bool | false | - | RTL mode |
-| theme | string | normal | - | Theme of the Input |
 | placeholderText | string | '' | - | placeholder of the Input |
-| prefix | node | default DatePicker icon | - | Icon for the DatePicker's Input |
-| inputDataHook | string | '' | - | dataHook for the DatePicker's Input |
 
 ## Keyboard support
 

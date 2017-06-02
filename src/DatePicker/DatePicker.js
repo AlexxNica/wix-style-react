@@ -14,14 +14,7 @@ export default class DatePicker extends Component {
     excludePastDates: PropTypes.bool,
     readOnly: PropTypes.bool,
     showYearDropdown: PropTypes.bool,
-    rtl: PropTypes.bool,
     placeholderText: PropTypes.string,
-    theme: PropTypes.string,
-    prefix: PropTypes.node,
-    inputDataHook: PropTypes.string,
-    onEnterPressed: PropTypes.func,
-    error: PropTypes.bool,
-    errorMessage: PropTypes.string,
     customInput: PropTypes.node
   };
 
