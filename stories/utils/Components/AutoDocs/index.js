@@ -8,14 +8,22 @@ const prepareParsedProps = props => {
     .keys(props)
     .map(key => ({...props[key], name: key}));
 
+  const required = asList.filter(prop => prop.required);
+  const notRequired = asList.filter(prop => !prop.required);
+
   // required props go first
-  return [...asList]
-    .sort(a => a.required ? -1 : 1);
+  return required.concat(notRequired);
 };
 
-const renderPropType = type => {
+const renderPropType = (type = {}) => {
   const wrap = name => children =>
-    <span>{name}({children})</span>;
+    <span>{name} [{children}]</span>;
+
+  const failSafe = type => () =>
+    <span>
+      Sorry, unable to parse this propType:
+      <pre>{JSON.stringify(type, null, 2)}</pre>
+    </span>;
 
   const typeHandlers = {
     custom: () => wrap('custom')(),
@@ -24,16 +32,34 @@ const renderPropType = type => {
       <span key={i}>{v.value}{allValues[i + 1] && ', '}</span>)),
 
     union: value => wrap('oneOfType')(value.map((v, i, allValues) =>
-      <span key={i}>{v.name}{allValues[i + 1] && ', '}</span>)),
+      <span key={i}>
+        {renderPropType(v)}
+        {allValues[i + 1] && ', '}
+      </span>
+    )),
 
-    arrayOf: value => wrap('arrayOf')((typeHandlers[value.name] || (i => i))(value.value))
+    shape: value => wrap('shape')(
+      <ul>
+        { Object
+          .keys(value)
+          .map(key => ({...value[key], key}))
+          .map((v, i) =>
+            <li key={i}>
+              {v.key}:&nbsp;
+              {renderPropType(v)}
+            </li>)
+        }
+      </ul>
+    ),
+
+    arrayOf: value => wrap('arrayOf')(renderPropType(value))
   };
 
   if (type.value) {
-    return (typeHandlers[type.name] || (i => i))(type.value);
+    return (typeHandlers[type.name] || failSafe(type))(type.value);
   }
 
-  return type.name;
+  return <span>{type.name}</span>;
 };
 
 const AutoDocs = ({source = ''}) => {
@@ -44,15 +70,20 @@ const AutoDocs = ({source = ''}) => {
       <td>{prop.name || '-'}</td>
       <td>{renderPropType(prop.type)}</td>
       <td><Markdown source={`\`${prop.defaultValue && prop.defaultValue.value}\``}/></td>
-      <td>{prop.required ? 'yes!' : '-'}</td>
+      <td>{prop.required ? 'Required' : '-'}</td>
       <td><Markdown source={prop.description}/></td>
     </tr>;
 
   return (
     <div className="markdown-body">
       <div>
-        <h1><code>{`<${displayName}/>`}</code> Component</h1>
+        <h1>
+          { displayName && <code>{`<${displayName}/>`}</code> }
+          Component
+        </h1>
       </div>
+
+      { !displayName && <blockquote>This component has no <code>displayName</code></blockquote> }
 
       { description && <Markdown source={description}/> }
 
