@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {parse} from 'react-docgen';
 import Markdown from '../Markdown';
 
+const shouldHideForE2E = process.env.STORYBOOK_E2E;
+
 const prepareParsedProps = props => {
   const asList = Object
     .keys(props)
@@ -74,7 +76,7 @@ const AutoDocs = ({source = ''}) => {
       <td><Markdown source={prop.description}/></td>
     </tr>;
 
-  return (
+  return !shouldHideForE2E && (
     <div className="markdown-body">
       <div>
         <h1>
