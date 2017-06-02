@@ -49,12 +49,11 @@ export default class DatePicker extends Component {
   }
 
   renderInput() {
-    const {rtl, style, theme, prefix, inputDataHook, onEnterPressed, error, errorMessage} = this.props;
+    const {style, customInput} = this.props;
     return (
       <DatePickerInput
-        rtl={rtl} style={style} theme={theme} prefix={prefix}
-        dataHook={inputDataHook} onEnterPressed={onEnterPressed} error={error}
-        errorMessage={errorMessage}
+        style={style}
+        customInput={customInput}
         />
     );
   }
@@ -70,7 +69,7 @@ export default class DatePicker extends Component {
               this.props.onChange(val);
             }
           }}
-          customInput={this.props.customInput || this.renderInput()}
+          customInput={this.renderInput()}
           filterDate={this.filterDate}
           readOnly={this.props.readOnly}
           showYearDropdown={this.props.showYearDropdown}
